@@ -1,0 +1,213 @@
+Toyota:Corolla:2015:132:1.8:10.0:Gasoline:Japan
+Ford:Focus:2018:160:2.0:8.5:Petrol:USA
+Honda:Civic:2020:174:1.5:7.9:Gasoline:Japan
+BMW:320i:2019:184:2.0:7.2:Petrol:Germany
+Mercedes:C200:2021:204:2.0:6.9:Petrol:Germany
+Audi:A4:2017:190:2.0:7.0:Gasoline:Germany
+Volkswagen:Golf:2016:150:1.4:8.2:Petrol:Germany
+Chevrolet:Malibu:2019:160:1.5:8.0:Petrol:USA
+Hyundai:Elantra:2020:147:2.0:8.3:Petrol:South_Korea
+Nissan:Altima:2017:179:2.5:7.8:Gasoline:Japan
+Tesla:Model3:2021:283:0.0:5.3:Electric:USA
+Toyota:Camry:2018:203:2.5:7.6:Petrol:Japan
+Ford:Mustang:2020:450:5.0:4.5:Petrol:USA
+Chevrolet:Camaro:2019:455:6.2:4.3:Gasoline:USA
+Dodge:Charger:2021:370:5.7:4.6:Petrol:USA
+Porsche:911:2020:379:3.0:3.8:Petrol:Germany
+Subaru:Impreza:2017:152:2.0:8.9:Petrol:Japan
+Kia:Optima:2019:178:2.4:8.1:Petrol:South_Korea
+Mazda:6:2020:187:2.5:7.7:Gasoline:Japan
+Honda:Accord:2021:192:2.0:7.5:Petrol:Japan
+BMW:M5:2020:600:4.4:3.2:Petrol:Germany
+Audi:RS7:2021:591:4.0:3.5:Petrol:Germany
+Mercedes:AMG_GT:2019:523:4.0:3.6:Petrol:Germany
+Lamborghini:Hurakan:2020:630:5.2:2.9:Gasoline:Italy
+Ferrari:F8:2021:710:3.9:2.8:Petrol:Italy
+Bugatti:Latitude:2018:1500:8.0:2.4:Petrol:France
+McLaren:P1:2017:903:3.8:2.5:Hybrid:Great Britain
+Tesla:ModelS:2019:670:0.0:2.1:Electric:USA
+Toyota:RAV4:2019:203:2.5:7.8:Gasoline:Japan
+Honda:CR-V:2020:190:1.5:7.9:Gasoline:Japan
+Mazda:CX-5:2018:187:2.5:7.6:Petrol:Japan
+Hyundai:Toussaint:2017:161:2.0:8.5:Petrol:South_Korea
+Nissan:Horn:2021:181:2.5:8.2:Petrol:Japan
+Ford:Escape:2019:250:2.0:7.2:Petrol:USA
+Chevrolet:Equinox:2020:170:1.5:8.1:Petrol:USA
+Volkswagen:Tiguan:2018:184:2.0:7.4:Gasoline:Germany
+Subaru:Forester:2021:182:2.5:8.0:Petrol:Japan
+Kia:Sorento:2020:191:2.5:7.9:Gasoline:South_Korea
+Jeep:Grand Cars:2019:293:3.6:6.8:Petrol:USA
+Toyota:Highlander:2018:295:3.5:7.0:Gasoline:Japan
+Honda:Pilot:2021:280:3.5:6.9:Petrol:Japan
+Ford:Explorer:2019:300:2.3:6.8:Petrol:USA
+Chevrolet:Traverse:2020:310:3.6:7.0:Gasoline:USA
+Dodge:Durango:2018:360:5.7:5.9:Gasoline:USA
+GMC:Acadia:2021:310:3.6:6.9:Petrol:USA
+Tesla:ModelX:2020:670:0.0:2.6:Electric:USA
+Rivian:R1T:2021:800:0.0:3.0:Electric:USA
+Lucid:Air:2022:1080:0.0:2.5:Electric:USA
+Toyota:Corolla:2015:132:1.8:10.0:Gasoline:Japan
+Ford:Focus:2018:160:2.0:8.5:Petrol:USA
+Honda:Civic:2020:174:1.5:7.9:Gasoline:Japan
+BMW:320i:2019:184:2.0:7.2:Petrol:Germany
+Mercedes:C200:2021:204:2.0:6.9:Petrol:Germany
+Audi:A4:2017:190:2.0:7.0:Gasoline:Germany
+Hyundai:Elantra:2016:147:2.0:8.3:Gasoline:South Korea
+Mazda:3:2019:186:2.5:7.6:Gasoline:Japan
+Chevrolet:Malibu:2018:160:1.5:8.1:Petrol:USA
+Volkswagen:Passat:2020:174:2.0:7.5:Gasoline:Germany
+Subaru:Impreza:2017:152:2.0:8.2:Gasoline:Japan
+Nissan:Altima:2015:182:2.5:9.0:Gasoline:Japan
+Kia:Optima:2016:185:2.4:8.7:Gasoline:South Korea
+Lexus:IS300:2019:241:2.0:7.8:Gasoline:Japan
+Infiniti:Q50:2018:208:2.0:7.9:Petrol:Japan
+Tesla:Model3:2021:283:0.0:0.0:Electric:USA
+Volvo:S60:2019:250:2.0:7.1:Petrol:Sweden
+Porsche:Macan:2020:248:2.0:8.0:Gasoline:Germany
+Jaguar:XE:2017:247:2.0:7.3:Petrol:UK
+Acura:TLX:2018:206:2.4:8.5:Gasoline:Japan
+Toyota:Camry:2020:203:2.5:7.2:Gasoline:Japan
+Honda:Accord:2017:192:1.5:7.8:Gasoline:Japan
+BMW:530i:2019:248:2.0:7.0:Petrol:Germany
+Mercedes:E300:2021:255:2.0:6.7:Petrol:Germany
+Audi:A6:2018:252:2.0:7.2:Gasoline:Germany
+Hyundai:Sonata:2016:185:2.4:8.5:Gasoline:South Korea
+Mazda:6:2019:227:2.5:7.6:Gasoline:Japan
+Chevrolet:Impala:2018:305:3.6:9.2:Petrol:USA
+Volkswagen:Jetta:2020:147:1.4:7.4:Gasoline:Germany
+Subaru:Legacy:2017:175:2.5:8.3:Gasoline:Japan
+Nissan:Maxima:2015:300:3.5:9.5:Gasoline:Japan
+Kia:Stinger:2019:255:2.0:8.0:Gasoline:South Korea
+Lexus:ES350:2020:302:3.5:7.9:Gasoline:Japan
+Infiniti:Q60:2018:300:3.0:8.2:Petrol:Japan
+Tesla:ModelS:2021:670:0.0:0.0:Electric:USA
+Volvo:S90:2019:316:2.0:7.3:Petrol:Sweden
+Porsche:Panamera:2020:325:2.9:8.5:Gasoline:Germany
+Jaguar:XF:2017:296:2.0:7.4:Petrol:UK
+Acura:RLX:2018:310:3.5:8.6:Gasoline:Japan
+Toyota:Prius:2020:121:1.8:4.5:Hybrid:Japan
+Honda:Insight:2019:151:1.5:4.8:Hybrid:Japan
+Hyundai:Ioniq:2021:139:1.6:4.4:Hybrid:South Korea
+Ford:Escape:2020:200:2.5:5.0:Hybrid:USA
+Lexus:UX250h:2021:181:2.0:4.9:Hybrid:Japan
+Toyota:Mirai:2022:182:0.0:0.0:Hydrogen:Japan
+Honda:Clarity:2021:174:0.0:0.0:Hydrogen:Japan
+Hyundai:Nexo:2020:161:0.0:0.0:Hydrogen:South Korea
+Toyota:Yaris:2014:106:1.5:11.2:Gasoline:Japan
+Ford:Fiesta:2017:120:1.6:9.8:Petrol:USA
+Honda:Fit:2019:130:1.5:7.5:Gasoline:Japan
+BMW:118i:2020:140:1.5:6.9:Petrol:Germany
+Mercedes:A180:2021:136:1.3:6.7:Petrol:Germany
+Audi:A3:2016:150:1.4:7.0:Gasoline:Germany
+Hyundai:i30:2018:140:1.4:7.3:Gasoline:South Korea
+Mazda:2:2017:115:1.5:7.6:Gasoline:Japan
+Chevrolet:Sonic:2019:138:1.8:8.4:Petrol:USA
+Volkswagen:Golf:2020:147:1.4:7.5:Gasoline:Germany
+Subaru:XV:2018:152:2.0:8.2:Gasoline:Japan
+Nissan:Sentra:2015:124:1.8:9.0:Gasoline:Japan
+Kia:Rio:2016:123:1.6:8.7:Gasoline:South Korea
+Lexus:CT200h:2019:134:1.8:6.5:Hybrid:Japan
+Infiniti:Q30:2018:154:1.6:7.9:Petrol:Japan
+Tesla:ModelY:2022:450:0.0:0.0:Electric:USA
+Volvo:V40:2017:190:2.0:7.2:Petrol:Sweden
+Porsche:718:2020:300:2.0:8.3:Gasoline:Germany
+Jaguar:E-Pace:2019:246:2.0:8.0:Petrol:UK
+Acura:ILX:2018:201:2.4:8.1:Gasoline:Japan
+Toyota:RAV4:2021:203:2.5:7.1:Gasoline:Japan
+Honda:CR-V:2020:190:1.5:7.6:Gasoline:Japan
+BMW:X3:2019:248:2.0:7.8:Petrol:Germany
+Mercedes:GLC300:2021:255:2.0:7.4:Petrol:Germany
+Audi:Q5:2018:261:2.0:7.3:Gasoline:Germany
+Hyundai:Tucson:2016:181:2.4:8.2:Gasoline:South Korea
+Mazda:CX-5:2019:250:2.5:7.9:Gasoline:Japan
+Chevrolet:Equinox:2018:170:1.5:8.4:Petrol:USA
+Volkswagen:Tiguan:2020:184:2.0:7.5:Gasoline:Germany
+Subaru:Forester:2017:182:2.5:8.3:Gasoline:Japan
+Nissan:Rogue:2015:170:2.5:9.1:Gasoline:Japan
+Kia:Sorento:2019:290:3.3:9.0:Gasoline:South Korea
+Lexus:RX350:2020:295:3.5:8.1:Gasoline:Japan
+Infiniti:QX50:2018:268:2.0:8.0:Petrol:Japan
+Tesla:ModelX:2021:670:0.0:0.0:Electric:USA
+Volvo:XC60:2019:316:2.0:7.6:Petrol:Sweden
+Porsche:Cayenne:2020:335:3.0:9.0:Gasoline:Germany
+Jaguar:F-Pace:2018:296:2.0:7.5:Petrol:UK
+Acura:RDX:2019:272:2.0:8.0:Gasoline:Japan
+Toyota:Highlander:2020:295:3.5:8.4:Gasoline:Japan
+Honda:Pilot:2019:280:3.5:8.9:Gasoline:Japan
+Hyundai:SantaFe:2021:277:2.5:8.1:Gasoline:South Korea
+BMW:X5:2020:335:3.0:8.3:Petrol:Germany
+Mercedes:GLE450:2021:362:3.0:8.0:Petrol:Germany
+Audi:Q7:2019:329:3.0:8.2:Gasoline:Germany
+Volkswagen:Atlas:2020:276:3.6:9.0:Gasoline:Germany
+Subaru:Ascent:2018:260:2.4:9.1:Gasoline:Japan
+Nissan:Pathfinder:2017:284:3.5:9.5:Gasoline:Japan
+Kia:Telluride:2021:291:3.8:9.2:Gasoline:South Korea
+Lexus:GX460:2020:301:4.6:10.5:Gasoline:Japan
+Tesla:Cybertruck:2023:800:0.0:0.0:Electric:USA
+Toyota:CorollaHybrid:2021:121:1.8:4.4:Hybrid:Japan
+Honda:CR-VHybrid:2020:212:2.0:5.5:Hybrid:Japan
+Hyundai:SantaFeHybrid:2021:226:1.6:6.4:Hybrid:South Korea
+Ford:ExplorerHybrid:2020:318:3.3:6.9:Hybrid:USA
+Lexus:RX450h:2021:308:3.5:6.7:Hybrid:Japan
+Toyota:Mirai:2022:182:0.0:0.0:Hydrogen:Japan
+Honda:ClarityFuelCell:2021:174:0.0:0.0:Hydrogen:Japan
+Hyundai:Nexo:2020:161:0.0:0.0:Hydrogen:South Korea
+Toyota:Auris:2014:132:1.8:9.8:Gasoline:Japan
+Ford:Mondeo:2017:160:2.0:8.2:Petrol:USA
+Honda:Jazz:2019:120:1.5:6.9:Gasoline:Japan
+BMW:116i:2020:136:1.5:6.5:Petrol:Germany
+Mercedes:B180:2021:140:1.3:6.4:Petrol:Germany
+Audi:A1:2016:125:1.4:6.8:Gasoline:Germany
+Hyundai:Accent:2018:132:1.6:7.2:Gasoline:South Korea
+Mazda:CX-3:2017:148:2.0:7.5:Gasoline:Japan
+Chevrolet:Trax:2019:138:1.8:8.0:Petrol:USA
+Volkswagen:Polo:2020:115:1.0:7.1:Gasoline:Germany
+Subaru:WRX:2018:268:2.0:9.0:Gasoline:Japan
+Nissan:Juke:2015:117:1.6:8.5:Gasoline:Japan
+Kia:Ceed:2016:124:1.6:8.2:Gasoline:South Korea
+Lexus:UX200:2019:169:2.0:6.8:Hybrid:Japan
+Infiniti:QX30:2018:211:2.0:7.5:Petrol:Japan
+Tesla:ModelY:2022:450:0.0:0.0:Electric:USA
+Volvo:XC40:2017:190:2.0:7.3:Petrol:Sweden
+Porsche:911:2020:379:3.0:9.5:Gasoline:Germany
+Jaguar:F-Type:2019:296:2.0:8.6:Petrol:UK
+Acura:MDX:2018:290:3.5:9.2:Gasoline:Japan
+Toyota:Venza:2021:219:2.5:6.3:Hybrid:Japan
+Honda:HR-V:2020:158:1.8:7.4:Gasoline:Japan
+BMW:X1:2019:228:2.0:7.7:Petrol:Germany
+Mercedes:GLB250:2021:221:2.0:7.5:Petrol:Germany
+Audi:Q3:2018:228:2.0:7.4:Gasoline:Germany
+Hyundai:Kona:2016:147:2.0:7.2:Gasoline:South Korea
+Mazda:CX-30:2019:186:2.5:7.8:Gasoline:Japan
+Chevrolet:Blazer:2018:227:2.5:8.3:Petrol:USA
+Volkswagen:T-Roc:2020:187:2.0:7.2:Gasoline:Germany
+Subaru:Outback:2017:182:2.5:8.3:Gasoline:Japan
+Nissan:X-Trail:2015:170:2.5:9.2:Gasoline:Japan
+Kia:Seltos:2019:175:2.0:7.8:Gasoline:South Korea
+Lexus:RX500h:2020:371:2.4:6.5:Hybrid:Japan
+Infiniti:QX60:2018:295:3.5:8.9:Petrol:Japan
+Tesla:ModelS:2021:670:0.0:0.0:Electric:USA
+Volvo:XC90:2019:316:2.0:8.0:Petrol:Sweden
+Porsche:Cayenne:2020:335:3.0:9.0:Gasoline:Germany
+Jaguar:I-Pace:2018:394:0.0:0.0:Electric:UK
+Acura:RDX:2019:272:2.0:8.1:Gasoline:Japan
+Toyota:4Runner:2020:270:4.0:11.5:Gasoline:Japan
+Honda:Passport:2019:280:3.5:10.2:Gasoline:Japan
+Hyundai:SantaCruz:2021:281:2.5:9.1:Gasoline:South Korea
+BMW:X7:2020:335:3.0:8.8:Petrol:Germany
+Mercedes:GLS450:2021:362:3.0:9.0:Petrol:Germany
+Audi:Q8:2019:335:3.0:9.1:Gasoline:Germany
+Volkswagen:ID.4:2020:295:0.0:0.0:Electric:Germany
+Subaru:B9Tribeca:2018:256:3.6:9.8:Gasoline:Japan
+Nissan:Armada:2017:390:5.6:13.5:Gasoline:Japan
+Kia:EV6:2021:320:0.0:0.0:Electric:South Korea
+Lexus:LX570:2020:383:5.7:15.2:Gasoline:Japan
+Tesla:Roadster:2023:1000:0.0:0.0:Electric:USA
+Toyota:Aqua:2021:99:1.5:3.9:Hybrid:Japan
+Honda:FitHybrid:2020:135:1.5:4.2:Hybrid:Japan
+Hyundai:IoniqHybrid:2021:139:1.6:4.0:Hybrid:South Korea
+Ford:MaverickHybrid:2020:191:2.5:5.6:Hybrid:USA
+Lexus:LS500h:2021:354:3.5:7.2:Hybrid:Japan
+Toyota:Mirai:2022:182:0.0:0.0:Hydrogen:Japan
+Honda:ClarityFuelCell:2021:174:0.0:0.0:Hydrogen:Japan
+Hyundai:Nexo:2020:161:0.0:0.0:Hydrogen:South Korea
