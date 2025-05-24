@@ -1,0 +1,843 @@
+ubuntu@ubuntu-VirtualBox:~/firstlab/dir1/9$ cd ~
+ubuntu@ubuntu-VirtualBox:~$ pwd
+/home/ubuntu
+ubuntu@ubuntu-VirtualBox:~$ mkdir -p dir1/dir2
+ubuntu@ubuntu-VirtualBox:~$ cd dir1/dir2
+ubuntu@ubuntu-VirtualBox:~/dir1/dir2$ touch file.txt
+ubuntu@ubuntu-VirtualBox:~/dir1/dir2$ cd ..
+ubuntu@ubuntu-VirtualBox:~/dir1$ mkdir abc def "abc def"
+ubuntu@ubuntu-VirtualBox:~/dir1$ ls -a
+ .   ..   abc  'abc def'   def   dir2
+ubuntu@ubuntu-VirtualBox:~/dir1$ touch file{1..3}.txt
+ubuntu@ubuntu-VirtualBox:~/dir1$ ls -l
+итого 16
+drwxrwxr-x 2 ubuntu ubuntu 4096 сен 23 20:11  abc
+drwxrwxr-x 2 ubuntu ubuntu 4096 сен 23 20:11 'abc def'
+drwxrwxr-x 2 ubuntu ubuntu 4096 сен 23 20:11  def
+drwxrwxr-x 2 ubuntu ubuntu 4096 сен 23 20:11  dir2
+-rw-rw-r-- 1 ubuntu ubuntu    0 сен 23 20:12  file1.txt
+-rw-rw-r-- 1 ubuntu ubuntu    0 сен 23 20:12  file2.txt
+-rw-rw-r-- 1 ubuntu ubuntu    0 сен 23 20:12  file3.txt
+ubuntu@ubuntu-VirtualBox:~/dir1$ rm dir2/file.txt
+ubuntu@ubuntu-VirtualBox:~/dir1$ rmdir dir2
+ubuntu@ubuntu-VirtualBox:~/dir1$ mkdir dir3
+ubuntu@ubuntu-VirtualBox:~/dir1$ cd dir3
+ubuntu@ubuntu-VirtualBox:~/dir1/dir3$ mkdir {a..g}
+ubuntu@ubuntu-VirtualBox:~/dir1/dir3$ cd ..
+ubuntu@ubuntu-VirtualBox:~/dir1$ rm dir3
+rm: невозможно удалить 'dir3': Это каталог
+ubuntu@ubuntu-VirtualBox:~/dir1$ rm -r dir3
+ubuntu@ubuntu-VirtualBox:~/dir1$ nano file1.txt
+ubuntu@ubuntu-VirtualBox:~/dir1$ ls file?.txt
+file1.txt  file2.txt  file3.txt
+ubuntu@ubuntu-VirtualBox:~/dir1$ rm *.txt
+ubuntu@ubuntu-VirtualBox:~/dir1$ ls
+ abc  'abc def'   def
+ubuntu@ubuntu-VirtualBox:~/dir1$ if rm file[1-3].txt
+> then echo good
+> else echo poop
+> fi
+rm: невозможно удалить 'file[1-3].txt': Нет такого файла или каталога
+poop
+ubuntu@ubuntu-VirtualBox:~/dir1$ touch file{1..3}.txt
+ubuntu@ubuntu-VirtualBox:~/dir1$ if rm file[1-3].txt; then echo good; else echo poop; fi
+good
+ubuntu@ubuntu-VirtualBox:~/dir1$ mkdir p/e && cd p/e || echo error
+mkdir: невозможно создать каталог «p/e»: Нет такого файла или каталога
+error
+ubuntu@ubuntu-VirtualBox:~/dir1$ echo $?
+0
+ubuntu@ubuntu-VirtualBox:~/dir1$ mkdir -p  p/e && cd p/e || echo error
+ubuntu@ubuntu-VirtualBox:~/dir1/p/e$ echo $?
+0
+ubuntu@ubuntu-VirtualBox:~/dir1$ A = "Hello, world!"
+A: команда не найдена
+ubuntu@ubuntu-VirtualBox:~/dir1$ echo $?
+127
+ubuntu@ubuntu-VirtualBox:~/dir1$ A="Hello, world!"
+ubuntu@ubuntu-VirtualBox:~/dir1$ echo $A
+Hello, world!
+ubuntu@ubuntu-VirtualBox:~/dir1$ echo ${A}
+Hello, world!
+ubuntu@ubuntu-VirtualBox:~/dir1$ echo ${#A}
+13
+ubuntu@ubuntu-VirtualBox:~/dir1$ echo $((5**3))
+125
+ubuntu@ubuntu-VirtualBox:~/dir1$ echo ${A:1}
+ello, world!
+ubuntu@ubuntu-VirtualBox:~/dir1$ echo ${A:0:5}
+Hello
+ubuntu@ubuntu-VirtualBox:~/dir1$ echo "$A"
+Hello, world!
+ubuntu@ubuntu-VirtualBox:~/dir1$ echo $A
+Hello, world!
+ubuntu@ubuntu-VirtualBox:~/dir1$ echo '$A'
+$A
+ubuntu@ubuntu-VirtualBox:~/dir1$ ping ya.ru | head -n 5 | wc
+      5      43     317
+ubuntu@ubuntu-VirtualBox:~/dir1$ tail -n 4
+fiuqdada
+fquf;afas
+a;ofaflas
+gepgvmdxv
+fasfldgaf
+faipof;afa
+faufoasfa
+faoi[fdvmafas
+faugfoafasf
+faipof;afa
+faufoasfa
+faoi[fdvmafas
+faugfoafasf
+ubuntu@ubuntu-VirtualBox:~/dir1$ nano file1.txt
+ubuntu@ubuntu-VirtualBox:~/dir1$ grep af file1.txt
+fquf;afas
+a;ofaflas
+fasfldgaf
+faipof;afa
+faoi[fdvmafas
+faugfoafasf
+faipof;afa
+faoi[fdvmafas
+faugfoafasf
+ubuntu@ubuntu-VirtualBox:~/dir1$ head -n 5 file1.txt| grep af 
+fquf;afas
+a;ofaflas
+fasfldgaf
+ubuntu@ubuntu-VirtualBox:~/dir1$ head -n 5 file1.txt| grep af | wc
+      3       3      30
+ubuntu@ubuntu-VirtualBox:~/dir1$ head -n 5 file1.txt| grep af | wc -l  #########################################
+3  #############################################################################################################
+ubuntu@ubuntu-VirtualBox:~/dir1$ nano f.sh
+ubuntu@ubuntu-VirtualBox:~/dir1$ ls -l
+итого 20
+drwxrwxr-x 2 ubuntu ubuntu 4096 сен 23 20:11  abc
+drwxrwxr-x 2 ubuntu ubuntu 4096 сен 23 20:11 'abc def'
+drwxrwxr-x 2 ubuntu ubuntu 4096 сен 23 20:11  def
+-rw-rw-r-- 1 ubuntu ubuntu  143 сен 23 20:24  file1.txt
+drwxrwxr-x 3 ubuntu ubuntu 4096 сен 23 20:17  p
+ubuntu@ubuntu-VirtualBox:~/dir1$ chmod +x f.sh
+chmod: невозможно получить доступ к 'f.sh': Нет такого файла или каталога
+ubuntu@ubuntu-VirtualBox:~/dir1$ cd
+ubuntu@ubuntu-VirtualBox:~$ ls
+ dir1       f.txt       mydir   Видео       Изображения    'Рабочий стол'
+ firstlab   homeworks   q.txt   Документы   Музыка          Шаблоны
+ f.sh       les2.4.sh   snap    Загрузки    Общедоступные
+ubuntu@ubuntu-VirtualBox:~$ mv f.sh dir1
+ubuntu@ubuntu-VirtualBox:~$ cd dir1
+ubuntu@ubuntu-VirtualBox:~/dir1$ ls
+ abc  'abc def'   def   file1.txt   f.sh   p
+ubuntu@ubuntu-VirtualBox:~/dir1$ ls -l
+итого 24
+drwxrwxr-x 2 ubuntu ubuntu 4096 сен 23 20:11  abc
+drwxrwxr-x 2 ubuntu ubuntu 4096 сен 23 20:11 'abc def'
+drwxrwxr-x 2 ubuntu ubuntu 4096 сен 23 20:11  def
+-rw-rw-r-- 1 ubuntu ubuntu  143 сен 23 20:24  file1.txt
+-rwxrwxr-x 1 ubuntu ubuntu  145 сен 23 11:24  f.sh
+drwxrwxr-x 3 ubuntu ubuntu 4096 сен 23 20:17  p
+ubuntu@ubuntu-VirtualBox:~/dir1$ chmod -x f.sh
+ubuntu@ubuntu-VirtualBox:~/dir1$ ./f.sh
+bash: ./f.sh: Отказано в доступе
+ubuntu@ubuntu-VirtualBox:~/dir1$ ls -l
+итого 24
+drwxrwxr-x 2 ubuntu ubuntu 4096 сен 23 20:11  abc
+drwxrwxr-x 2 ubuntu ubuntu 4096 сен 23 20:11 'abc def'
+drwxrwxr-x 2 ubuntu ubuntu 4096 сен 23 20:11  def
+-rw-rw-r-- 1 ubuntu ubuntu  143 сен 23 20:24  file1.txt
+-rw-rw-r-- 1 ubuntu ubuntu  145 сен 23 11:24  f.sh
+drwxrwxr-x 3 ubuntu ubuntu 4096 сен 23 20:17  p
+ubuntu@ubuntu-VirtualBox:~/dir1$ chmod +x f.sh
+ubuntu@ubuntu-VirtualBox:~/dir1$ ls -l
+итого 24
+drwxrwxr-x 2 ubuntu ubuntu 4096 сен 23 20:11  abc
+drwxrwxr-x 2 ubuntu ubuntu 4096 сен 23 20:11 'abc def'
+drwxrwxr-x 2 ubuntu ubuntu 4096 сен 23 20:11  def
+-rw-rw-r-- 1 ubuntu ubuntu  143 сен 23 20:24  file1.txt
+-rwxrwxr-x 1 ubuntu ubuntu  145 сен 23 11:24  f.sh
+drwxrwxr-x 3 ubuntu ubuntu 4096 сен 23 20:17  p
+ubuntu@ubuntu-VirtualBox:~/dir1$ ./f.sh
+Введите число №1
+6
+Введите число №2
+4
+1.50
+ubuntu@ubuntu-VirtualBox:~/dir1$ python3
+Python 3.12.3 (main, Sep 11 2024, 14:17:37) [GCC 13.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> int('111100000', 2)
+480
+>>> oct('480')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'str' object cannot be interpreted as an integer
+>>> oct(480)
+'0o740'
+###################### EXIT WITH CTRL+D #################################################
+>>> 
+ubuntu@ubuntu-VirtualBox:~/dir1$ chmod 740 f.sh
+ubuntu@ubuntu-VirtualBox:~/dir1$ ls -l
+итого 24
+drwxrwxr-x 2 ubuntu ubuntu 4096 сен 23 20:11  abc
+drwxrwxr-x 2 ubuntu ubuntu 4096 сен 23 20:11 'abc def'
+drwxrwxr-x 2 ubuntu ubuntu 4096 сен 23 20:11  def
+-rw-rw-r-- 1 ubuntu ubuntu  143 сен 23 20:24  file1.txt
+-rwxr----- 1 ubuntu ubuntu  145 сен 23 11:24  f.sh
+drwxrwxr-x 3 ubuntu ubuntu 4096 сен 23 20:17  p
+ubuntu@ubuntu-VirtualBox:~/dir1$ chmod u=rw, g+w, o= f.sh
+chmod: неверный режим: «u=rw,»
+По команде «chmod --help» можно получить дополнительную информацию.
+ubuntu@ubuntu-VirtualBox:~/dir1$ chmod u=rw,g=r,o= f.sh
+ubuntu@ubuntu-VirtualBox:~/dir1$ chmod u=rw,g+w,o= f.sh
+ubuntu@ubuntu-VirtualBox:~/dir1$ ls -l
+итого 24
+drwxrwxr-x 2 ubuntu ubuntu 4096 сен 23 20:11  abc
+drwxrwxr-x 2 ubuntu ubuntu 4096 сен 23 20:11 'abc def'
+drwxrwxr-x 2 ubuntu ubuntu 4096 сен 23 20:11  def
+-rw-rw-r-- 1 ubuntu ubuntu  143 сен 23 20:24  file1.txt
+-rw-rw---- 1 ubuntu ubuntu  145 сен 23 11:24  f.sh
+drwxrwxr-x 3 ubuntu ubuntu 4096 сен 23 20:17  p
+ubuntu@ubuntu-VirtualBox:~/dir1$ chmod u+x f.sh
+ubuntu@ubuntu-VirtualBox:~/dir1$ ls -l
+итого 24
+drwxrwxr-x 2 ubuntu ubuntu 4096 сен 23 20:11  abc
+drwxrwxr-x 2 ubuntu ubuntu 4096 сен 23 20:11 'abc def'
+drwxrwxr-x 2 ubuntu ubuntu 4096 сен 23 20:11  def
+-rw-rw-r-- 1 ubuntu ubuntu  143 сен 23 20:24  file1.txt
+-rwxrw---- 1 ubuntu ubuntu  145 сен 23 11:24  f.sh
+drwxrwxr-x 3 ubuntu ubuntu 4096 сен 23 20:17  p
+ubuntu@ubuntu-VirtualBox:~/dir1$ chmod a=rwx file1.txt
+ubuntu@ubuntu-VirtualBox:~/dir1$ ls
+ abc  'abc def'   def   file1.txt   f.sh   p
+ubuntu@ubuntu-VirtualBox:~/dir1$ ls -l
+итого 24
+drwxrwxr-x 2 ubuntu ubuntu 4096 сен 23 20:11  abc
+drwxrwxr-x 2 ubuntu ubuntu 4096 сен 23 20:11 'abc def'
+drwxrwxr-x 2 ubuntu ubuntu 4096 сен 23 20:11  def
+-rwxrwxrwx 1 ubuntu ubuntu  143 сен 23 20:24  file1.txt
+-rwxrw---- 1 ubuntu ubuntu  145 сен 23 11:24  f.sh
+drwxrwxr-x 3 ubuntu ubuntu 4096 сен 23 20:17  p
+ubuntu@ubuntu-VirtualBox:~/dir1$ ping ya.ru &
+[1] 7422
+ubuntu@ubuntu-VirtualBox:~/dir1$ PING ya.ru (77.88.55.242) 56(84) bytes of data.
+64 bytes from ya.ru (77.88.55.242): icmp_seq=1 ttl=255 time=510 ms
+64 bytes from ya.ru (77.88.55.242): icmp_seq=2 ttl=255 time=340 ms
+64 bytes from ya.ru (77.88.55.242): icmp_seq=3 ttl=255 time=227 ms
+j64 bytes from ya.ru (77.88.55.242): icmp_seq=4 ttl=255 time=258 ms
+obs
+[1]+  Запущен          ping ya.ru &
+ubuntu@ubuntu-VirtualBox:~/dir1$ 64 bytes from ya.ru (77.88.55.242): icmp_seq=5 ttl=255 time=294 ms
+64 bytes from ya.ru (77.88.55.242): icmp_seq=6 ttl=255 time=278 ms
+64 bytes from ya.ru (77.88.55.242): icmp_seq=7 ttl=255 time=331 ms
+^C
+ubuntu@ubuntu-VirtualBox:~/dir1$ 64 bytes from ya.ru (77.88.55.242): icmp_seq=8 ttl=255 time=338 ms
+64 bytes from ya.ru (77.88.55.242): icmp_seq=9 ttl=255 time=347 ms
+64 bytes from ya.ru (77.88.55.242): icmp_seq=10 ttl=255 time=334 ms
+64 bytes from ya.ru (77.88.55.242): icmp_seq=11 ttl=255 time=433 ms
+64 bytes from ya.ru (77.88.55.242): icmp_seq=12 ttl=255 time=452 ms
+64 bytes from ya.ru (77.88.55.242): icmp_seq=13 ttl=255 time=91.2 ms
+64 bytes from ya.ru (77.88.55.242): icmp_seq=14 ttl=255 time=111 ms
+64 bytes from ya.ru (77.88.55.242): icmp_seq=15 ttl=255 time=149 ms
+g64 bytes from ya.ru (77.88.55.242): icmp_seq=16 ttl=255 time=307 ms
+f
+gf: команда не найдена
+ubuntu@ubuntu-VirtualBox:~/dir1$ 64 bytes from ya.ru (77.88.55.242): icmp_seq=17 ttl=255 time=311 ms
+64 bytes from ya.ru (77.88.55.242): icmp_seq=18 ttl=255 time=354 ms
+fg64 bytes from ya.ru (77.88.55.242): icmp_seq=19 ttl=255 time=341 ms
+
+ping ya.ru
+64 bytes from ya.ru (77.88.55.242): icmp_seq=20 ttl=255 time=314 ms
+64 bytes from ya.ru (77.88.55.242): icmp_seq=21 ttl=255 time=252 ms
+^C
+--- ya.ru ping statistics ---
+21 packets transmitted, 21 received, 0% packet loss, time 21906ms
+rtt min/avg/max/mdev = 91.211/303.435/509.524/99.645 ms
+ubuntu@ubuntu-VirtualBox:~/dir1$ ping ya.ru &
+[1] 7441
+ubuntu@ubuntu-VirtualBox:~/dir1$ PING ya.ru (5.255.255.242) 56(84) bytes of data.
+64 bytes from ya.ru (5.255.255.242): icmp_seq=1 ttl=255 time=158 ms
+64 bytes from ya.ru (5.255.255.242): icmp_seq=2 ttl=255 time=53.9 ms
+64 bytes from ya.ru (5.255.255.242): icmp_seq=3 ttl=255 time=52.5 ms
+64 bytes from ya.ru (5.255.255.242): icmp_seq=4 ttl=255 time=421 ms
+64 bytes from ya.ru (5.255.255.242): icmp_seq=5 ttl=255 time=342 ms
+64 bytes from ya.ru (5.255.255.242): icmp_seq=6 ttl=255 time=365 ms
+64 bytes from ya.ru (5.255.255.242): icmp_seq=7 ttl=255 time=424 ms
+64 bytes from ya.ru (5.255.255.242): icmp_seq=8 ttl=255 time=425 ms
+64 bytes from ya.ru (5.255.255.242): icmp_seq=9 ttl=255 time=466 ms
+64 bytes from ya.ru (5.255.255.242): icmp_seq=10 ttl=255 time=266 ms
+64 bytes from ya.ru (5.255.255.242): icmp_seq=11 ttl=255 time=268 ms
+64 bytes from ya.ru (5.255.255.242): icmp_seq=12 ttl=255 time=320 ms
+gq64 bytes from ya.ru (5.255.255.242): icmp_seq=13 ttl=255 time=322 ms
+64 bytes from ya.ru (5.255.255.242): icmp_seq=14 ttl=255 time=319 ms
+
+ubuntu@ubuntu-VirtualBox:~/dir1$ 64 bytes from ya.ru (5.255.255.242): icmp_seq=15 ttl=255 time=321 ms
+64 bytes from ya.ru (5.255.255.242): icmp_seq=16 ttl=255 time=358 ms
+fq
+Команда «fq» не найдена, но может быть установлена с помощью:
+sudo apt install fq  # version 0.9.0-2ubuntu0.24.04.1, or
+sudo apt install nq  # version 0.3.1-4
+ubuntu@ubuntu-VirtualBox:~/dir1$ 64 bytes from ya.ru (5.255.255.242): icmp_seq=17 ttl=255 time=360 ms
+64 bytes from ya.ru (5.255.255.242): icmp_seq=18 ttl=255 time=408 ms
+64 bytes from ya.ru (5.255.255.242): icmp_seq=19 ttl=255 time=445 ms
+64 bytes from ya.ru (5.255.255.242): icmp_seq=20 ttl=255 time=443 ms
+64 bytes from ya.ru (5.255.255.242): icmp_seq=21 ttl=255 time=445 ms
+fg64 bytes from ya.ru (5.255.255.242): icmp_seq=22 ttl=255 time=490 ms
+
+ping ya.ru
+64 bytes from ya.ru (5.255.255.242): icmp_seq=23 ttl=255 time=493 ms
+64 bytes from ya.ru (5.255.255.242): icmp_seq=24 ttl=255 time=498 ms
+64 bytes from ya.ru (5.255.255.242): icmp_seq=25 ttl=255 time=504 ms
+^Z
+[1]+  Остановлен    ping ya.ru
+ubuntu@ubuntu-VirtualBox:~/dir1$ jobs
+[1]+  Остановлен    ping ya.ru
+ubuntu@ubuntu-VirtualBox:~/dir1$ ping ya.ru 
+PING ya.ru (77.88.55.242) 56(84) bytes of data.
+64 bytes from ya.ru (77.88.55.242): icmp_seq=1 ttl=255 time=509 ms
+64 bytes from ya.ru (77.88.55.242): icmp_seq=2 ttl=255 time=63.9 ms
+64 bytes from ya.ru (77.88.55.242): icmp_seq=3 ttl=255 time=217 ms
+64 bytes from ya.ru (77.88.55.242): icmp_seq=4 ttl=255 time=410 ms
+^C
+--- ya.ru ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3817ms
+rtt min/avg/max/mdev = 63.897/299.869/508.944/172.040 ms
+ubuntu@ubuntu-VirtualBox:~/dir1$ bc %
+File % is unavailable.
+ubuntu@ubuntu-VirtualBox:~/dir1$ bc &
+[2] 7476
+ubuntu@ubuntu-VirtualBox:~/dir1$ bc 1.07.1
+Copyright 1991-1994, 1997, 1998, 2000, 2004, 2006, 2008, 2012-2017 Free Software Foundation, Inc.
+This is free software with ABSOLUTELY NO WARRANTY.
+For details type `warranty'. 
+1 + 1
+1: команда не найдена
+
+[2]+  Остановлен    bc
+ubuntu@ubuntu-VirtualBox:~/dir1$ jobs
+[1]-  Остановлен    ping ya.ru
+[2]+  Остановлен    bc
+ubuntu@ubuntu-VirtualBox:~$ bg
+[2]+ bc &
+ubuntu@ubuntu-VirtualBox:~$ 
+exit
+Есть остановленные задания.
+
+[2]+  Остановлен    bc
+
+ubuntu@ubuntu-VirtualBox:~/dir1$ fg 1
+ping ya.ru
+64 bytes from ya.ru (5.255.255.242): icmp_seq=26 ttl=255 time=501 ms
+64 bytes from ya.ru (5.255.255.242): icmp_seq=27 ttl=255 time=501 ms
+^C
+--- ya.ru ping statistics ---
+28 packets transmitted, 27 received, 3.57143% packet loss, time 104543ms
+rtt min/avg/max/mdev = 52.483/369.199/503.579/123.428 ms
+ubuntu@ubuntu-VirtualBox:~/dir1$ jobs
+[2]+  Остановлен    bc
+ubuntu@ubuntu-VirtualBox:~/dir1$ fg
+bc
+
+ubuntu@ubuntu-VirtualBox:~/dir1$ ps
+    PID TTY          TIME CMD
+   6194 pts/1    00:00:00 bash
+   7521 pts/1    00:00:00 ps
+ubuntu@ubuntu-VirtualBox:~/dir1$ ps
+    PID TTY          TIME CMD
+   6194 pts/1    00:00:00 bash
+   7527 pts/1    00:00:00 ps
+ubuntu@ubuntu-VirtualBox:~/dir1$ bc &
+[1] 7530
+ubuntu@ubuntu-VirtualBox:~/dir1$ bc 1.07.1
+Copyright 1991-1994, 1997, 1998, 2000, 2004, 2006, 2008, 2012-2017 Free Software Foundation, Inc.
+This is free software with ABSOLUTELY NO WARRANTY.
+For details type `warranty'. 
+^C
+
+[1]+  Остановлен    bc
+ubuntu@ubuntu-VirtualBox:~/dir1$ ps
+    PID TTY          TIME CMD
+   6194 pts/1    00:00:00 bash
+   7530 pts/1    00:00:00 bc
+   7534 pts/1    00:00:00 ps
+ubuntu@ubuntu-VirtualBox:~/dir1$ ps -aux
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           1  0.0  0.2  22920 13564 ?        Ss   19:07   0:02 /sbin/init sp
+root           2  0.0  0.0      0     0 ?        S    19:07   0:00 [kthreadd]
+root           3  0.0  0.0      0     0 ?        S    19:07   0:00 [pool_workque
+root           4  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/R-rc
+root           5  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/R-rc
+root           6  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/R-sl
+root           7  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/R-ne
+root          10  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/0:0H
+root          12  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/R-mm
+root          13  0.0  0.0      0     0 ?        I    19:07   0:00 [rcu_tasks_kt
+root          14  0.0  0.0      0     0 ?        I    19:07   0:00 [rcu_tasks_ru
+root          15  0.0  0.0      0     0 ?        I    19:07   0:00 [rcu_tasks_tr
+root          16  0.0  0.0      0     0 ?        S    19:07   0:00 [ksoftirqd/0]
+root          17  0.0  0.0      0     0 ?        I    19:07   0:03 [rcu_preempt]
+root          18  0.0  0.0      0     0 ?        S    19:07   0:00 [migration/0]
+root          19  0.0  0.0      0     0 ?        S    19:07   0:00 [idle_inject/
+root          20  0.0  0.0      0     0 ?        S    19:07   0:00 [cpuhp/0]
+root          21  0.0  0.0      0     0 ?        S    19:07   0:00 [cpuhp/1]
+root          22  0.0  0.0      0     0 ?        S    19:07   0:00 [idle_inject/
+root          23  0.0  0.0      0     0 ?        S    19:07   0:00 [migration/1]
+root          24  0.0  0.0      0     0 ?        S    19:07   0:00 [ksoftirqd/1]
+root          26  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/1:0H
+root          27  0.0  0.0      0     0 ?        S    19:07   0:00 [cpuhp/2]
+root          28  0.0  0.0      0     0 ?        S    19:07   0:00 [idle_inject/
+root          29  0.0  0.0      0     0 ?        S    19:07   0:00 [migration/2]
+root          30  0.0  0.0      0     0 ?        S    19:07   0:00 [ksoftirqd/2]
+root          32  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/2:0H
+root          33  0.0  0.0      0     0 ?        S    19:07   0:00 [cpuhp/3]
+root          34  0.0  0.0      0     0 ?        S    19:07   0:00 [idle_inject/
+root          35  0.0  0.0      0     0 ?        S    19:07   0:00 [migration/3]
+root          36  0.0  0.0      0     0 ?        S    19:07   0:00 [ksoftirqd/3]
+root          38  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/3:0H
+root          42  0.0  0.0      0     0 ?        I    19:07   0:00 [kworker/u12:
+root          43  0.0  0.0      0     0 ?        S    19:07   0:00 [kdevtmpfs]
+root          44  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/R-in
+root          46  0.0  0.0      0     0 ?        S    19:07   0:00 [kauditd]
+root          48  0.0  0.0      0     0 ?        S    19:07   0:00 [khungtaskd]
+root          49  0.0  0.0      0     0 ?        S    19:07   0:00 [oom_reaper]
+root          51  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/R-wr
+root          52  0.0  0.0      0     0 ?        S    19:07   0:00 [kcompactd0]
+root          53  0.0  0.0      0     0 ?        SN   19:07   0:00 [ksmd]
+root          54  0.0  0.0      0     0 ?        SN   19:07   0:00 [khugepaged]
+root          55  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/R-ki
+root          56  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/R-kb
+root          57  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/R-bl
+root          58  0.0  0.0      0     0 ?        S    19:07   0:00 [irq/9-acpi]
+root          59  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/R-tp
+root          60  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/R-at
+root          61  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/R-md
+root          62  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/R-md
+root          63  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/R-ed
+root          64  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/R-de
+root          65  0.0  0.0      0     0 ?        S    19:07   0:00 [watchdogd]
+root          66  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/2:1H
+root          67  0.0  0.0      0     0 ?        S    19:07   0:00 [kswapd0]
+root          68  0.0  0.0      0     0 ?        S    19:07   0:00 [ecryptfs-kth
+root          70  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/R-kt
+root          71  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/R-ac
+root          72  0.0  0.0      0     0 ?        S    19:07   0:00 [scsi_eh_0]
+root          73  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/R-sc
+root          74  0.0  0.0      0     0 ?        S    19:07   0:00 [scsi_eh_1]
+root          75  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/R-sc
+root          79  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/R-ml
+root          81  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/0:1H
+root          82  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/R-ip
+root          92  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/R-ks
+root          94  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/u13:
+root          95  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/u14:
+root          96  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/u15:
+root          97  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/u16:
+root          98  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/u17:
+root         112  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/R-ch
+root         176  0.0  0.0      0     0 ?        S    19:07   0:00 [scsi_eh_2]
+root         178  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/R-sc
+root         227  0.0  0.0      0     0 ?        S    19:07   0:01 [jbd2/sda2-8]
+root         228  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/R-ex
+root         278  0.0  0.3  67228 18076 ?        S<s  19:07   0:01 /usr/lib/syst
+root         328  0.0  0.0      0     0 ?        I    19:07   0:00 [kworker/u8:1
+root         353  0.0  0.1  30420  8568 ?        Ss   19:07   0:00 /usr/lib/syst
+systemd+     423  0.0  0.1  17556  7296 ?        Ss   19:07   0:01 /usr/lib/syst
+root         430  0.0  0.0      0     0 ?        S    19:07   0:00 [psimon]
+systemd+     433  0.0  0.2  21844 13056 ?        Ss   19:07   0:00 /usr/lib/syst
+systemd+     460  0.0  0.1  91044  7808 ?        Ssl  19:07   0:00 /usr/lib/syst
+root         512  0.0  0.0      0     0 ?        I    19:07   0:00 [kworker/u12:
+root         531  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/3:2H
+root         591  0.0  0.0      0     0 ?        S    19:07   0:00 [irq/18-vmwgf
+root         594  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/R-tt
+avahi        611  0.0  0.0   8664  4480 ?        Ss   19:07   0:00 avahi-daemon:
+message+     621  0.0  0.1  12040  6784 ?        Ss   19:07   0:01 @dbus-daemon 
+gnome-r+     629  0.0  0.3 512796 16188 ?        Ssl  19:07   0:00 /usr/libexec/
+root         636  0.0  0.0      0     0 ?        I<   19:07   0:00 [kworker/R-cr
+polkitd      656  0.0  0.2 384504 10644 ?        Ssl  19:07   0:00 /usr/lib/polk
+root         660  0.0  0.1 322540  7808 ?        Ssl  19:07   0:00 /usr/libexec/
+root         680  0.0  0.6 1991056 31436 ?       Ssl  19:07   0:01 /usr/lib/snap
+root         687  0.0  0.1 322356  8036 ?        Ssl  19:07   0:00 /usr/libexec/
+root         702  0.0  0.0  18092  2816 ?        Ss   19:07   0:00 /usr/sbin/cro
+root         707  0.0  0.1 318732  7040 ?        Ssl  19:07   0:00 /usr/libexec/
+root         719  0.0  0.1  18136  8448 ?        Ss   19:07   0:00 /usr/lib/syst
+root         729  0.0  0.2 469368 13496 ?        Ssl  19:07   0:00 /usr/libexec/
+avahi        752  0.0  0.0   8476  1440 ?        S    19:07   0:00 avahi-daemon:
+syslog       754  0.0  0.1 222564  5888 ?        Ssl  19:07   0:00 /usr/sbin/rsy
+root         776  0.0  0.3 346096 19656 ?        Ssl  19:07   0:00 /usr/sbin/Net
+root         783  0.0  0.1  17376  6272 ?        Ss   19:07   0:00 /usr/sbin/wpa
+root         819  0.0  0.2 392096 12592 ?        Ssl  19:07   0:00 /usr/sbin/Mod
+root        1119  0.0  0.2  46652 11392 ?        Ss   19:07   0:00 /usr/sbin/cup
+root        1122  0.0  0.4 126608 24576 ?        Ssl  19:07   0:00 /usr/bin/pyth
+lp          1134  0.0  0.1  16840  6912 ?        S    19:07   0:00 /usr/lib/cups
+lp          1136  0.0  0.1  16840  6912 ?        S    19:07   0:00 /usr/lib/cups
+root        1137  0.0  0.1 323884  9728 ?        Ssl  19:07   0:00 /usr/sbin/gdm
+cups-br+    1146  0.0  0.3 268400 19840 ?        Ssl  19:07   0:00 /usr/sbin/cup
+kernoops    1148  0.0  0.0  12744  2320 ?        Ss   19:07   0:00 /usr/sbin/ker
+root        1150  0.0  0.2 398800 10752 ?        Sl   19:07   0:00 gdm-session-w
+kernoops    1156  0.0  0.0  12744  2220 ?        Ss   19:07   0:00 /usr/sbin/ker
+root        1159  0.0  0.0      0     0 ?        S    19:07   0:00 [psimon]
+ubuntu      1161  0.0  0.2  21100 12672 ?        Ss   19:07   0:01 /usr/lib/syst
+ubuntu      1162  0.0  0.0  21456  3736 ?        S    19:07   0:00 (sd-pam)
+ubuntu      1174  0.0  0.3 125052 15352 ?        Ssl  19:07   0:03 /usr/bin/pipe
+ubuntu      1175  0.0  0.1 106404  5632 ?        Ssl  19:07   0:00 /usr/bin/pipe
+ubuntu      1178  0.0  0.3 415896 18816 ?        Ssl  19:07   0:01 /usr/bin/wire
+ubuntu      1179  0.0  0.3 130076 18452 ?        Ssl  19:07   0:01 /usr/bin/pipe
+ubuntu      1180  0.0  0.2 325440 10240 ?        SLsl 19:07   0:00 /usr/bin/gnom
+ubuntu      1190  0.0  0.1  11116  6656 ?        Ss   19:07   0:01 /usr/bin/dbus
+ubuntu      1204  0.0  0.1 619356  7808 ?        Ssl  19:07   0:00 /usr/libexec/
+rtkit       1205  0.0  0.0  88476  3456 ?        SNsl 19:07   0:00 /usr/libexec/
+ubuntu      1220  0.0  0.1 244756  6272 tty2     Ssl+ 19:07   0:00 /usr/libexec/
+ubuntu      1221  0.0  0.1 318500  6272 ?        Ssl  19:07   0:00 /usr/libexec/
+ubuntu      1228  0.0  0.3 307280 16768 tty2     Sl+  19:07   0:00 /usr/libexec/
+root        1239  0.0  0.0   2704  1920 ?        Ss   19:07   0:00 fusermount3 -
+ubuntu      1303  0.0  0.1 162652  6784 ?        Ssl  19:07   0:00 /usr/libexec/
+ubuntu      1304  0.0  0.1 100216  5632 ?        Ssl  19:07   0:00 /usr/libexec/
+ubuntu      1318  0.0  0.1 323388  8320 ?        Ssl  19:07   0:00 /usr/libexec/
+ubuntu      1326  0.0  0.1 468776  7296 ?        Sl   19:07   0:00 /usr/libexec/
+ubuntu      1333  0.0  0.3 677612 18944 ?        Ssl  19:07   0:00 /usr/libexec/
+root        1340  0.0  0.0      0     0 ?        I    19:07   0:00 [kworker/u9:3
+ubuntu      1376 13.1  8.7 5065480 436692 ?      Ssl  19:07  12:45 /usr/bin/gnom
+ubuntu      1379  0.0  0.1 382952  7680 ?        Sl   19:07   0:00 /usr/libexec/
+ubuntu      1389  0.0  0.1   9604  5120 ?        S    19:07   0:00 /usr/bin/dbus
+ubuntu      1453  0.0  0.1 236068  7424 ?        Sl   19:07   0:00 /usr/libexec/
+colord      1454  0.0  0.2 329112 14920 ?        Ssl  19:07   0:00 /usr/libexec/
+ubuntu      1482  0.0  0.3 654872 17280 ?        Sl   19:07   0:00 /usr/libexec/
+ubuntu      1488  0.0  0.1 230220  5760 ?        Ssl  19:07   0:00 /usr/libexec/
+ubuntu      1495  0.0  0.8 1267176 43136 ?       Ssl  19:07   0:00 /usr/libexec/
+ubuntu      1503  0.0  0.5 2598044 27256 ?       Sl   19:07   0:00 /usr/bin/gjs 
+root        1509  0.0  0.1 325724  9344 ?        Ssl  19:07   0:00 /usr/libexec/
+ubuntu      1510  0.1  0.2 397912 12608 ?        Ssl  19:07   0:10 /usr/bin/ibus
+ubuntu      1512  0.0  0.1 392688  6784 ?        Ssl  19:07   0:00 /usr/libexec/
+ubuntu      1513  0.0  0.4 422640 20840 ?        Ssl  19:07   0:00 /usr/libexec/
+ubuntu      1518  0.0  0.2 440844 12288 ?        Ssl  19:07   0:00 /usr/libexec/
+ubuntu      1519  0.0  0.1 468044  8064 ?        Ssl  19:07   0:00 /usr/libexec/
+ubuntu      1520  0.0  0.4 421484 20352 ?        Ssl  19:07   0:00 /usr/libexec/
+ubuntu      1521  0.0  0.5 751388 25768 ?        Ssl  19:07   0:00 /usr/libexec/
+ubuntu      1522  0.0  0.4 606884 24784 ?        Ssl  19:07   0:00 /usr/libexec/
+ubuntu      1526  0.0  0.2 332516 11520 ?        Ssl  19:07   0:00 /usr/libexec/
+ubuntu      1532  0.0  0.1 540240  7168 ?        Ssl  19:07   0:00 /usr/libexec/
+ubuntu      1533  0.0  0.1 318444  6144 ?        Ssl  19:07   0:00 /usr/libexec/
+ubuntu      1536  0.0  0.2 552364 12032 ?        Ssl  19:07   0:00 /usr/libexec/
+ubuntu      1537  0.0  0.1 468720  8320 ?        Ssl  19:07   0:00 /usr/libexec/
+ubuntu      1538  0.0  0.1 402808  9984 ?        Ssl  19:07   0:00 /usr/libexec/
+ubuntu      1541  0.0  0.4 496184 21392 ?        Ssl  19:07   0:00 /usr/libexec/
+ubuntu      1593  0.0  1.2 819380 63912 ?        Sl   19:07   0:00 /usr/libexec/
+ubuntu      1615  0.0  0.1 305492  7168 ?        Sl   19:07   0:00 /usr/libexec/
+ubuntu      1631  0.0  0.2  39000 12032 ?        Ss   19:07   0:00 /snap/snapd-d
+ubuntu      1690  0.0  0.2 398328 10624 ?        Ssl  19:07   0:00 /usr/libexec/
+ubuntu      1731  0.0  0.1 319532  7296 ?        Sl   19:07   0:00 /usr/libexec/
+ubuntu      1732  0.0  0.6 431080 30308 ?        Sl   19:07   0:03 /usr/libexec/
+ubuntu      1738  0.0  0.1 319312  7296 ?        Sl   19:07   0:00 /usr/libexec/
+ubuntu      1764  0.0  0.4 555748 24192 ?        Sl   19:07   0:00 /usr/libexec/
+ubuntu      1773  0.0  0.1 318648  6656 ?        Ssl  19:07   0:00 /usr/libexec/
+ubuntu      1774  0.0  0.3 425092 15104 ?        Sl   19:07   0:00 /usr/libexec/
+ubuntu      1789  0.0  0.1 318784  6400 ?        Ssl  19:07   0:00 /usr/libexec/
+ubuntu      1815  0.0  0.1 398212  9216 ?        Sl   19:07   0:00 /usr/libexec/
+ubuntu      1817  0.0  0.4 899956 24704 ?        Ssl  19:07   0:00 /usr/libexec/
+ubuntu      1829  0.0  0.1 398260  8192 ?        Ssl  19:07   0:00 /usr/libexec/
+ubuntu      1830  0.0  0.6 429488 30348 ?        Sl   19:07   0:00 /snap/snapd-d
+ubuntu      1837  0.0  0.1 319616  6912 ?        Ssl  19:07   0:00 /usr/libexec/
+ubuntu      1864  0.0  0.6 760780 30464 ?        Ssl  19:07   0:00 /usr/libexec/
+ubuntu      1881  0.0  0.1 245836  7680 ?        Sl   19:07   0:04 /usr/libexec/
+ubuntu      1922  0.0  0.1 618564  9216 ?        Sl   19:07   0:00 /usr/libexec/
+ubuntu      1967  0.0  0.5 956464 29132 ?        SNsl 19:07   0:00 /usr/libexec/
+ubuntu      1971  0.0  0.2 710684 14980 ?        Ssl  19:07   0:00 /usr/libexec/
+ubuntu      1986  0.1  4.2 2204660 214300 ?      Ssl  19:07   0:06 /usr/libexec/
+ubuntu      1998  0.0  0.5 2540596 27420 ?       Sl   19:07   0:00 /usr/bin/gjs 
+ubuntu      2021  0.0  0.1 245280  6784 ?        Ssl  19:07   0:00 /usr/libexec/
+ubuntu      2027  0.0  0.5 427468 26748 ?        Ssl  19:07   0:00 /usr/libexec/
+ubuntu      2072  2.3  7.8 11431520 394580 ?     Sl   19:07   2:16 /snap/firefox
+ubuntu      2202  0.3  1.1 709796 58404 ?        Ssl  19:07   0:17 /usr/libexec/
+ubuntu      2257  0.0  0.9 208672 48640 ?        Sl   19:07   0:00 /snap/firefox
+ubuntu      2284  0.0  1.8 2436156 94096 ?       Sl   19:08   0:01 /snap/firefox
+ubuntu      2312  0.0  2.6 2464716 132796 ?      Sl   19:08   0:04 /snap/firefox
+ubuntu      2355  3.2  7.1 23985604 356824 ?     Sl   19:08   3:05 /snap/firefox
+ubuntu      2404  0.0  0.4 1836124 20644 ?       Sl   19:08   0:00 /usr/bin/snap
+ubuntu      2889  0.0  1.1 344284 59136 ?        Sl   19:08   0:00 /snap/firefox
+ubuntu      2995  0.0  1.1 341456 55168 ?        Sl   19:08   0:00 /snap/firefox
+ubuntu      3081  0.0  0.5 501860 29020 ?        Sl   19:08   0:00 /usr/bin/upda
+root        3710  0.0  0.0      0     0 ?        I<   19:16   0:00 [kworker/1:2H
+ubuntu      3997  0.0  1.1 216456 59020 ?        S    19:23   0:00 /usr/bin/Xway
+ubuntu      4001  0.0  1.5 623540 76140 ?        Ssl  19:23   0:00 /usr/libexec/
+ubuntu      4024  0.0  0.4 276432 24960 ?        Sl   19:23   0:00 /usr/libexec/
+ubuntu      4026  0.0  1.7 1394140 90000 ?       Sl   19:23   0:00 /usr/libexec/
+ubuntu      4076  0.0  0.1 471448  9088 ?        Sl   19:23   0:00 /usr/libexec/
+ubuntu      4094  0.0  0.1 399668  9344 ?        Sl   19:23   0:00 /usr/libexec/
+ubuntu      4256  0.0  0.1 397464  8832 ?        Sl   19:24   0:00 /usr/libexec/
+ubuntu      4367  0.0  4.5 2352112 225780 ?      Sl   19:25   0:02 /usr/bin/naut
+ubuntu      4405  2.5  5.1 2257692 260416 ?      Sl   19:25   2:01 /usr/bin/gnom
+root        4831  0.0  0.0      0     0 ?        I    19:35   0:00 [kworker/u12:
+root        5437  0.0  0.0      0     0 ?        I    19:49   0:00 [kworker/u11:
+root        5457  0.0  0.0      0     0 ?        I    19:50   0:00 [kworker/u9:0
+root        5531  0.0  0.7 559992 38632 ?        Ssl  19:52   0:00 /usr/libexec/
+root        5541  0.0  0.0      0     0 ?        I    19:52   0:00 [kworker/0:1-
+root        5778  0.0  0.0      0     0 ?        I    19:59   0:00 [kworker/u8:2
+root        5779  0.0  0.0      0     0 ?        I    19:59   0:00 [kworker/2:1-
+root        5939  0.0  0.0      0     0 ?        I    20:04   0:00 [kworker/u11:
+ubuntu      6083  0.0  1.2 2885884 62848 ?       Sl   20:08   0:00 gjs /usr/shar
+ubuntu      6194  0.0  0.1  19820  5248 pts/1    Ss   20:09   0:00 bash
+root        6607  0.0  0.0      0     0 ?        I    20:20   0:00 [kworker/3:2-
+root        6682  0.0  0.0      0     0 ?        I    20:21   0:00 [kworker/u11:
+root        6688  0.0  0.0      0     0 ?        I    20:22   0:00 [kworker/1:1-
+root        6872  0.0  0.0      0     0 ?        I    20:25   0:00 [kworker/u10:
+root        6992  0.0  0.0      0     0 ?        I    20:29   0:00 [kworker/u11:
+root        7002  0.0  0.0      0     0 ?        I    20:29   0:00 [kworker/2:2-
+root        7072  0.0  0.0      0     0 ?        I    20:31   0:00 [kworker/1:0-
+ubuntu      7105  0.0  1.4 2395756 72960 ?       Sl   20:32   0:00 /snap/firefox
+root        7124  0.0  0.0      0     0 ?        I    20:32   0:00 [kworker/u10:
+root        7141  0.0  0.0      0     0 ?        I    20:33   0:00 [kworker/3:0]
+ubuntu      7172  0.0  1.4 2395756 73088 ?       Sl   20:33   0:00 /snap/firefox
+root        7238  0.0  0.0      0     0 ?        I    20:35   0:00 [kworker/0:2-
+ubuntu      7357  0.0  1.4 2395756 73344 ?       Sl   20:38   0:00 /snap/firefox
+root        7402  0.0  0.0      0     0 ?        I    20:39   0:00 [kworker/2:0-
+root        7416  0.0  0.0      0     0 ?        I    20:40   0:00 [kworker/1:2-
+ubuntu      7490  0.0  0.1  19692  5248 pts/0    Ss   20:42   0:00 bash
+ubuntu      7524  0.0  0.0  18964  2816 pts/0    S+   20:43   0:00 ping ya.ru
+ubuntu      7530  0.0  0.0  17816  3072 pts/1    T    20:43   0:00 bc
+ubuntu      7535  100  0.1  23828  5504 pts/1    R+   20:44   0:00 ps -aux
+ubuntu@ubuntu-VirtualBox:~/dir1$ ps
+    PID TTY          TIME CMD
+   6194 pts/1    00:00:00 bash
+   7530 pts/1    00:00:00 bc
+   7689 pts/1    00:00:00 ps
+ubuntu@ubuntu-VirtualBox:~/dir1$ ps -aux | grep ping
+ubuntu      1519  0.0  0.1 468044  8064 ?        Ssl  19:07   0:00 /usr/libexec/gsd-housekeeping
+ubuntu      7671  0.0  0.0  18964  2816 pts/0    S    20:47   0:00 ping ya.ru
+ubuntu      7700  0.0  0.0  17836  2304 pts/1    S+   20:47   0:00 grep --color=auto ping
+ubuntu@ubuntu-VirtualBox:~/dir1$ kill 7641
+bash: kill: (7641) - Нет такого процесса
+ubuntu@ubuntu-VirtualBox:~/dir1$ kill 7700
+bash: kill: (7700) - Нет такого процесса
+ubuntu@ubuntu-VirtualBox:~/dir1$ jobs
+[1]+  Остановлен    bc
+ubuntu@ubuntu-VirtualBox:~/dir1$ ps -aux | grep ping
+ubuntu      1519  0.0  0.1 468044  8064 ?        Ssl  19:07   0:00 /usr/libexec/gsd-housekeeping
+ubuntu      7671  0.0  0.0  18964  2816 ?        S    20:47   0:00 ping ya.ru
+ubuntu      7900  0.0  0.0  17836  2304 pts/1    S+   20:51   0:00 grep --color=auto ping
+ubuntu@ubuntu-VirtualBox:~/dir1$ kill -9 7671
+ubuntu@ubuntu-VirtualBox:~/dir1$ ps -aux | grep ping
+ubuntu      1519  0.0  0.1 468044  8064 ?        Ssl  19:07   0:00 /usr/libexec/gsd-housekeeping
+ubuntu      7909  0.0  0.0  17836  2304 pts/1    S+   20:51   0:00 grep --color=auto ping
+ubuntu@ubuntu-VirtualBox:~/dir1$ ps -aux | grep bc
+ubuntu      2312  0.0  2.6 2464716 133952 ?      Sl   19:08   0:04 /snap/firefox/4955/usr/lib/firefox/firefox -contentproc -childID 2 -isForBrowser -prefsLen 30630 -prefMapSize 254694 -jsInitLen 234840 -parentBuildID 20240916093609 -greomni /snap/firefox/4955/usr/lib/firefox/omni.ja -appomni /snap/firefox/4955/usr/lib/firefox/browser/omni.ja -appDir /snap/firefox/4955/usr/lib/firefox/browser {7d25ead3-d0f9-4821-b9dd-b7c59e9fbccd} 2072 true tab
+ubuntu      2355  3.1  7.2 23987680 361960 ?     Sl   19:08   3:18 /snap/firefox/4955/usr/lib/firefox/firefox -contentproc -childID 5 -isForBrowser -prefsLen 27410 -prefMapSize 254694 -jsInitLen 234840 -parentBuildID 20240916093609 -greomni /snap/firefox/4955/usr/lib/firefox/omni.ja -appomni /snap/firefox/4955/usr/lib/firefox/browser/omni.ja -appDir /snap/firefox/4955/usr/lib/firefox/browser {fcd2f2a3-6fbd-4aa4-a571-8c1ebc9adf01} 2072 true tab
+ubuntu      7530  0.0  0.0  17816  3072 pts/1    T    20:43   0:00 bc
+ubuntu      7944  0.0  0.0  17836  2304 pts/1    S+   20:52   0:00 grep --color=auto bc
+ubuntu@ubuntu-VirtualBox:~/dir1$ kill 7530
+ubuntu@ubuntu-VirtualBox:~/dir1$ ps -aux | grep bc
+ubuntu      2312  0.0  2.6 2464716 133952 ?      Sl   19:08   0:04 /snap/firefox/4955/usr/lib/firefox/firefox -contentproc -childID 2 -isForBrowser -prefsLen 30630 -prefMapSize 254694 -jsInitLen 234840 -parentBuildID 20240916093609 -greomni /snap/firefox/4955/usr/lib/firefox/omni.ja -appomni /snap/firefox/4955/usr/lib/firefox/browser/omni.ja -appDir /snap/firefox/4955/usr/lib/firefox/browser {7d25ead3-d0f9-4821-b9dd-b7c59e9fbccd} 2072 true tab
+ubuntu      2355  3.1  7.1 23987668 360504 ?     Sl   19:08   3:18 /snap/firefox/4955/usr/lib/firefox/firefox -contentproc -childID 5 -isForBrowser -prefsLen 27410 -prefMapSize 254694 -jsInitLen 234840 -parentBuildID 20240916093609 -greomni /snap/firefox/4955/usr/lib/firefox/omni.ja -appomni /snap/firefox/4955/usr/lib/firefox/browser/omni.ja -appDir /snap/firefox/4955/usr/lib/firefox/browser {fcd2f2a3-6fbd-4aa4-a571-8c1ebc9adf01} 2072 true tab
+ubuntu      7530  0.0  0.0  17816  3072 pts/1    T    20:43   0:00 bc
+ubuntu      7946  0.0  0.0  17836  2304 pts/1    S+   20:52   0:00 grep --color=auto bc
+ubuntu@ubuntu-VirtualBox:~/dir1$ kill -9 7530
+ubuntu@ubuntu-VirtualBox:~/dir1$ ps -aux | grep bc
+ubuntu      2312  0.0  2.6 2464732 133948 ?      Sl   19:08   0:04 /snap/firefox/4955/usr/lib/firefox/firefox -contentproc -childID 2 -isForBrowser -prefsLen 30630 -prefMapSize 254694 -jsInitLen 234840 -parentBuildID 20240916093609 -greomni /snap/firefox/4955/usr/lib/firefox/omni.ja -appomni /snap/firefox/4955/usr/lib/firefox/browser/omni.ja -appDir /snap/firefox/4955/usr/lib/firefox/browser {7d25ead3-d0f9-4821-b9dd-b7c59e9fbccd} 2072 true tab
+ubuntu      2355  3.1  7.2 23987668 363312 ?     Sl   19:08   3:19 /snap/firefox/4955/usr/lib/firefox/firefox -contentproc -childID 5 -isForBrowser -prefsLen 27410 -prefMapSize 254694 -jsInitLen 234840 -parentBuildID 20240916093609 -greomni /snap/firefox/4955/usr/lib/firefox/omni.ja -appomni /snap/firefox/4955/usr/lib/firefox/browser/omni.ja -appDir /snap/firefox/4955/usr/lib/firefox/browser {fcd2f2a3-6fbd-4aa4-a571-8c1ebc9adf01} 2072 true tab
+ubuntu      7952  0.0  0.0  17836  2304 pts/1    S+   20:52   0:00 grep --color=auto bc
+[1]+  Убито              bc
+ubuntu@ubuntu-VirtualBox:~/dir1$ 
+
+
+
+
+
+
+############################ disown and kill
+ubuntu@ubuntu-VirtualBox:~/dir1$ ping ya.ru &
+[1] 7825
+ubuntu@ubuntu-VirtualBox:~/dir1$ PING ya.ru (77.88.55.242) 56(84) bytes of data.
+64 bytes from ya.ru (77.88.55.242): icmp_seq=1 ttl=255 time=122 ms
+64 bytes from ya.ru (77.88.55.242): icmp_seq=2 ttl=255 time=157 ms
+jobs
+[1]+  Запущен          ping ya.ru &
+ubuntu@ubuntu-VirtualBox:~/dir1$ 64 bytes from ya.ru (77.88.55.242): icmp_seq=3 ttl=255 time=261 ms
+64 bytes from ya.ru (77.88.55.242): icmp_seq=4 ttl=255 time=279 ms
+dis64 bytes from ya.ru (77.88.55.242): icmp_seq=5 ttl=255 time=314 ms
+own64 bytes from ya.ru (77.88.55.242): icmp_seq=6 ttl=255 time=333 ms
+
+ubuntu@ubuntu-VirtualBox:~/dir1$ 64 bytes from ya.ru (77.88.55.242): icmp_seq=7 ttl=255 time=340 ms
+jo64 bytes from ya.ru (77.88.55.242): icmp_seq=8 ttl=255 time=284 ms
+bs
+ubuntu@ubuntu-VirtualBox:~/dir1$ 64 bytes from ya.ru (77.88.55.242): icmp_seq=9 ttl=255 time=298 ms
+64 bytes from ya.ru (77.88.55.242): icmp_seq=10 ttl=255 time=303 ms
+64 bytes from ya.ru (77.88.55.242): icmp_seq=11 ttl=255 time=414 ms
+64 bytes from ya.ru (77.88.55.242): icmp_seq=12 ttl=255 time=424 ms
+64 bytes from ya.ru (77.88.55.242): icmp_seq=13 ttl=255 time=430 ms
+64 bytes from ya.ru (77.88.55.242): icmp_seq=14 ttl=255 time=154 ms
+64 bytes from ya.ru (77.88.55.242): icmp_seq=15 ttl=255 time=154 ms
+64 bytes from ya.ru (77.88.55.242): icmp_seq=16 ttl=255 time=162 ms
+p64 bytes from ya.ru (77.88.55.242): icmp_seq=17 ttl=255 time=162 ms
+s
+    PID TTY          TIME CMD
+   7785 pts/2    00:00:00 bash
+   7825 pts/2    00:00:00 ping
+   7838 pts/2    00:00:00 ps
+ubuntu@ubuntu-VirtualBox:~/dir1$ 64 bytes from ya.ru (77.88.55.242): icmp_seq=18 ttl=255 time=203 ms
+64 bytes from ya.ru (77.88.55.242): icmp_seq=19 ttl=255 time=64.1 ms
+64 bytes from ya.ru (77.88.55.242): icmp_seq=20 ttl=255 time=168 ms
+kil64 bytes from ya.ru (77.88.55.242): icmp_seq=21 ttl=255 time=214 ms
+l64 bytes from ya.ru (77.88.55.242): icmp_seq=22 ttl=255 time=227 ms
+ 64 bytes from ya.ru (77.88.55.242): icmp_seq=23 ttl=255 time=20.8 ms
+64 bytes from ya.ru (77.88.55.242): icmp_seq=24 ttl=255 time=33.7 ms
+764 bytes from ya.ru (77.88.55.242): icmp_seq=25 ttl=255 time=84.8 ms
+82564 bytes from ya.ru (77.88.55.242): icmp_seq=26 ttl=255 time=334 ms
+
+ubuntu@ubuntu-VirtualBox:~/dir1$ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+########################АБСОЛЮТНЫЕ И ОТНОСИТЕЛЬНЫЕ ПУТИ######################################
+ubuntu@ubuntu-VirtualBox:~$ name1=proper
+ubuntu@ubuntu-VirtualBox:~$ name2=bold
+ubuntu@ubuntu-VirtualBox:~$ mkdir -p $name1/$name2
+ubuntu@ubuntu-VirtualBox:~$ cd $name1/./$name2
+ubuntu@ubuntu-VirtualBox:~/proper/bold$ ../..
+bash: ../..: Это каталог
+ubuntu@ubuntu-VirtualBox:~/proper/bold$ cd ../..
+ubuntu@ubuntu-VirtualBox:~$ cd -
+/home/ubuntu/proper/bold
+ubuntu@ubuntu-VirtualBox:~/proper/bold$ 
+
+###############################SSH#############################################################
+ubuntu@ubuntu-VirtualBox:~/proper/bold$ ssh stud@45.12.5.87
+stud@45.12.5.87's password: 
+Last failed login: Sun Oct  6 10:11:05 UTC 2024 from 5.228.113.235 on ssh:notty
+There were 2 failed login attempts since the last successful login.
+Last login: Sun Oct  6 10:08:18 2024 from 5.228.113.235
+[stud@dubininalexey2 ~]$ ls
+777         Grigorev         Mydir
+Aidar       IrinaSp          oleg
+archive     KILLSCRIPT.sh    papka.tgz
+asranna     Konovalov        Ptushka
+a.txt       Korochin         Sakharov
+Belofastov  Kozneva_Ksenia   test
+CHERNORUSI  krasavchik       test.py
+Daniil      krasavchik.txt   test.txt
+Denis       kutkov           text.txt
+dir         Kuzmin_Egor      vary
+dir.tgz     kypi_slona       Vladislav
+dryg        Lab              volkov
+Efremov     laba1            Zarutskiy
+FEDOR       Litvinova        Zhidkikh
+Gavrilov    Log              ЗакревскийБогЧернорусов
+Gleb        Martinov_Sergio
+goga        misha
+[stud@dubininalexey2 ~]$ cd volkov
+[stud@dubininalexey2 volkov]$ ls
+a  c     dir1.tgz  dorabotka.txt
+b  dir1  dir2.zip  kapibara.txt
+[stud@dubininalexey2 volkov]$ exit
+выход
+Connection to 45.12.5.87 closed.
+ubuntu@ubuntu-VirtualBox:~/proper/bold$ touch file{1..10}.md
+ubuntu@ubuntu-VirtualBox:~/proper/bold$ ls
+file10.md  file2.md  file4.md  file6.md  file8.md
+file1.md   file3.md  file5.md  file7.md  file9.md
+ubuntu@ubuntu-VirtualBox:~/proper$ cd bold
+ubuntu@ubuntu-VirtualBox:~/proper/bold$ ls
+file10.md  file2.md  file4.md  file6.md  file8.md
+file1.md   file3.md  file5.md  file7.md  file9.md
+ubuntu@ubuntu-VirtualBox:~/proper/bold$ cd ..
+ubuntu@ubuntu-VirtualBox:~/proper$ tar -czvf ./perenos.tgz ./$name2/file*
+./bold/file10.md
+./bold/file1.md
+./bold/file2.md
+./bold/file3.md
+./bold/file4.md
+./bold/file5.md
+./bold/file6.md
+./bold/file7.md
+./bold/file8.md
+./bold/file9.md
+ubuntu@ubuntu-VirtualBox:~/proper$ ls
+bold  perenos.tar  perenos.tgz
+ubuntu@ubuntu-VirtualBox:~/proper$ scp ./perenos.tgz stud@45.12.5.87:~/volkov
+stud@45.12.5.87's password: 
+perenos.tgz              100%  201     0.4KB/s   00:00    
+ubuntu@ubuntu-VirtualBox:~/proper$ ssh stud@45.12.5.87
+stud@45.12.5.87's password: 
+Last login: Sun Oct  6 13:58:27 2024 from 194.54.176.106
+[stud@dubininalexey2 ~]$ cd volkov
+[stud@dubininalexey2 volkov]$ ls
+a  c     dir1.tgz  dorabotka.txt  perenos.tar
+b  dir1  dir2.zip  kapibara.txt   perenos.tgz
+[stud@dubininalexey2 volkov]$ tar -xzf perenos.tgz -C a/
+[stud@dubininalexey2 volkov]$ cd a
+[stud@dubininalexey2 a]$ ls
+bold
+[stud@dubininalexey2 a]$ cd bold
+[stud@dubininalexey2 bold]$ ls
+file10.md  file2.md  file4.md  file6.md  file8.md
+file1.md   file3.md  file5.md  file7.md  file9.md
+[stud@dubininalexey2 bold]$ cd ../..
+[stud@dubininalexey2 volkov]$ cd b
+[stud@dubininalexey2 b]$ touch file{1..10}.txt
+[stud@dubininalexey2 b]$ touch bile{1..10}.txt
+[stud@dubininalexey2 b]$ ls
+bile10.txt  bile4.txt  bile8.txt   file2.txt  file6.txt
+bile1.txt   bile5.txt  bile9.txt   file3.txt  file7.txt
+bile2.txt   bile6.txt  file10.txt  file4.txt  file8.txt
+bile3.txt   bile7.txt  file1.txt   file5.txt  file9.txt
+[stud@dubininalexey2 b]$ exit
+выход
+Connection to 45.12.5.87 closed.
+ubuntu@ubuntu-VirtualBox:~/proper$ scp stud@45.12.5.87:~/volkov/b/*"10.txt" ./
+stud@45.12.5.87's password: 
+ubuntu@ubuntu-VirtualBox:~/proper$ ls
+bile10.txt  bold  file10.txt  perenos.tar  perenos.tgz
+ubuntu@ubuntu-VirtualBox:~/proper$ ssh stud@45.12.5.87
+stud@45.12.5.87's password: 
+Last login: Sun Oct  6 14:36:22 2024 from 194.54.176.106
+[stud@dubininalexey2 ~]$ cd volkov
+[stud@dubininalexey2 volkov]$ ls
+a  c     dir1.tgz  dorabotka.txt  perenos.tar
+b  dir1  dir2.zip  kapibara.txt   perenos.tgz
+[stud@dubininalexey2 volkov]$ exit
+выход
+Connection to 45.12.5.87 closed.
+ubuntu@ubuntu-VirtualBox:~/proper$ ls
+bile10.txt  bold  file10.txt  perenos.tar  perenos.tgz
+ubuntu@ubuntu-VirtualBox:~/proper$ cat bile10.txt | ssh stud@45.12.5.87 'cat > ~/volkov/bile10.txt'
+stud@45.12.5.87's password: 
+ubuntu@ubuntu-VirtualBox:~/proper$ ssh stud@45.12.5.87 'cd ~/volkov && ls'
+stud@45.12.5.87's password: 
+a
+b
+bile10.txt
+c
+dir1
+dir1.tgz
+dir2.zip
+dorabotka.txt
+file10.txt
+kapibara.txt
+perenos.tar
+perenos.tgz
+ubuntu@ubuntu-VirtualBox:~/proper$ ssh stud@45.12.5.87 'cd ~/volkov/b && tar -czf - bile*' | tar -xzf - -C ~/$name1/$name2
+stud@45.12.5.87's password: 
+
+ubuntu@ubuntu-VirtualBox:~/proper$ ssh stud@45.12.5.87 'cd ~/volkov/b && tar -czf - bile*' | tar -xzf - -C ~/$name1/$name2
+stud@45.12.5.87's password: 
+ubuntu@ubuntu-VirtualBox:~/proper$ ls
+bile10.txt  bold  file10.txt  perenos.tar  perenos.tgz
+ubuntu@ubuntu-VirtualBox:~/proper$ cd $name2
+ubuntu@ubuntu-VirtualBox:~/proper/bold$ ls
+bile10.txt  bile4.txt  bile8.txt  file2.md  file6.md
+bile1.txt   bile5.txt  bile9.txt  file3.md  file7.md
+bile2.txt   bile6.txt  file10.md  file4.md  file8.md
+bile3.txt   bile7.txt  file1.md   file5.md  file9.md
+ubuntu@ubuntu-VirtualBox:~/proper/bold$ 

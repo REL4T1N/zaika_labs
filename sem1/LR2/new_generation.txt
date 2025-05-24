@@ -1,0 +1,141 @@
+########################АБСОЛЮТНЫЕ И ОТНОСИТЕЛЬНЫЕ ПУТИ######################################
+ubuntu@ubuntu-VirtualBox:~$ name1=proper
+ubuntu@ubuntu-VirtualBox:~$ name2=bold
+ubuntu@ubuntu-VirtualBox:~$ mkdir -p $name1/$name2
+ubuntu@ubuntu-VirtualBox:~$ cd $name1/./$name2
+ubuntu@ubuntu-VirtualBox:~/proper/bold$ ../..
+bash: ../..: Это каталог
+ubuntu@ubuntu-VirtualBox:~/proper/bold$ cd ../..
+ubuntu@ubuntu-VirtualBox:~$ cd -
+/home/ubuntu/proper/bold
+ubuntu@ubuntu-VirtualBox:~/proper/bold$ 
+
+###############################SSH#############################################################
+ubuntu@ubuntu-VirtualBox:~/proper/bold$ ssh stud@45.12.5.87
+stud@45.12.5.87's password: 
+Last failed login: Sun Oct  6 10:11:05 UTC 2024 from 5.228.113.235 on ssh:notty
+There were 2 failed login attempts since the last successful login.
+Last login: Sun Oct  6 10:08:18 2024 from 5.228.113.235
+[stud@dubininalexey2 ~]$ ls
+777         Grigorev         Mydir
+Aidar       IrinaSp          oleg
+archive     KILLSCRIPT.sh    papka.tgz
+asranna     Konovalov        Ptushka
+a.txt       Korochin         Sakharov
+Belofastov  Kozneva_Ksenia   test
+CHERNORUSI  krasavchik       test.py
+Daniil      krasavchik.txt   test.txt
+Denis       kutkov           text.txt
+dir         Kuzmin_Egor      vary
+dir.tgz     kypi_slona       Vladislav
+dryg        Lab              volkov
+Efremov     laba1            Zarutskiy
+FEDOR       Litvinova        Zhidkikh
+Gavrilov    Log              ЗакревскийБогЧернорусов
+Gleb        Martinov_Sergio
+goga        misha
+[stud@dubininalexey2 ~]$ cd volkov
+[stud@dubininalexey2 volkov]$ ls
+a  c     dir1.tgz  dorabotka.txt
+b  dir1  dir2.zip  kapibara.txt
+[stud@dubininalexey2 volkov]$ exit
+выход
+Connection to 45.12.5.87 closed.
+ubuntu@ubuntu-VirtualBox:~/proper/bold$ touch file{1..10}.md
+ubuntu@ubuntu-VirtualBox:~/proper/bold$ ls
+file10.md  file2.md  file4.md  file6.md  file8.md
+file1.md   file3.md  file5.md  file7.md  file9.md
+ubuntu@ubuntu-VirtualBox:~/proper$ cd bold
+ubuntu@ubuntu-VirtualBox:~/proper/bold$ ls
+file10.md  file2.md  file4.md  file6.md  file8.md
+file1.md   file3.md  file5.md  file7.md  file9.md
+ubuntu@ubuntu-VirtualBox:~/proper/bold$ cd ..
+ubuntu@ubuntu-VirtualBox:~/proper$ tar -czvf ./perenos.tgz ./$name2/file*
+./bold/file10.md
+./bold/file1.md
+./bold/file2.md
+./bold/file3.md
+./bold/file4.md
+./bold/file5.md
+./bold/file6.md
+./bold/file7.md
+./bold/file8.md
+./bold/file9.md
+ubuntu@ubuntu-VirtualBox:~/proper$ ls
+bold  perenos.tar  perenos.tgz
+ubuntu@ubuntu-VirtualBox:~/proper$ scp ./perenos.tgz stud@45.12.5.87:~/volkov
+stud@45.12.5.87's password: 
+perenos.tgz              100%  201     0.4KB/s   00:00    
+ubuntu@ubuntu-VirtualBox:~/proper$ ssh stud@45.12.5.87
+stud@45.12.5.87's password: 
+Last login: Sun Oct  6 13:58:27 2024 from 194.54.176.106
+[stud@dubininalexey2 ~]$ cd volkov
+[stud@dubininalexey2 volkov]$ ls
+a  c     dir1.tgz  dorabotka.txt  perenos.tar
+b  dir1  dir2.zip  kapibara.txt   perenos.tgz
+[stud@dubininalexey2 volkov]$ tar -xzf perenos.tgz -C a/
+[stud@dubininalexey2 volkov]$ cd a
+[stud@dubininalexey2 a]$ ls
+bold
+[stud@dubininalexey2 a]$ cd bold
+[stud@dubininalexey2 bold]$ ls
+file10.md  file2.md  file4.md  file6.md  file8.md
+file1.md   file3.md  file5.md  file7.md  file9.md
+[stud@dubininalexey2 bold]$ cd ../..
+[stud@dubininalexey2 volkov]$ cd b
+[stud@dubininalexey2 b]$ touch file{1..10}.txt
+[stud@dubininalexey2 b]$ touch bile{1..10}.txt
+[stud@dubininalexey2 b]$ ls
+bile10.txt  bile4.txt  bile8.txt   file2.txt  file6.txt
+bile1.txt   bile5.txt  bile9.txt   file3.txt  file7.txt
+bile2.txt   bile6.txt  file10.txt  file4.txt  file8.txt
+bile3.txt   bile7.txt  file1.txt   file5.txt  file9.txt
+[stud@dubininalexey2 b]$ exit
+выход
+Connection to 45.12.5.87 closed.
+ubuntu@ubuntu-VirtualBox:~/proper$ scp stud@45.12.5.87:~/volkov/b/*"10.txt" ./
+stud@45.12.5.87's password: 
+ubuntu@ubuntu-VirtualBox:~/proper$ ls
+bile10.txt  bold  file10.txt  perenos.tar  perenos.tgz
+ubuntu@ubuntu-VirtualBox:~/proper$ ssh stud@45.12.5.87
+stud@45.12.5.87's password: 
+Last login: Sun Oct  6 14:36:22 2024 from 194.54.176.106
+[stud@dubininalexey2 ~]$ cd volkov
+[stud@dubininalexey2 volkov]$ ls
+a  c     dir1.tgz  dorabotka.txt  perenos.tar
+b  dir1  dir2.zip  kapibara.txt   perenos.tgz
+[stud@dubininalexey2 volkov]$ exit
+выход
+Connection to 45.12.5.87 closed.
+ubuntu@ubuntu-VirtualBox:~/proper$ ls
+bile10.txt  bold  file10.txt  perenos.tar  perenos.tgz
+ubuntu@ubuntu-VirtualBox:~/proper$ cat bile10.txt | ssh stud@45.12.5.87 'cat > ~/volkov/bile10.txt'
+stud@45.12.5.87's password: 
+ubuntu@ubuntu-VirtualBox:~/proper$ ssh stud@45.12.5.87 'cd ~/volkov && ls'
+stud@45.12.5.87's password: 
+a
+b
+bile10.txt
+c
+dir1
+dir1.tgz
+dir2.zip
+dorabotka.txt
+file10.txt
+kapibara.txt
+perenos.tar
+perenos.tgz
+ubuntu@ubuntu-VirtualBox:~/proper$ ssh stud@45.12.5.87 'cd ~/volkov/b && tar -czf - bile*' | tar -xzf - -C ~/$name1/$name2
+stud@45.12.5.87's password: 
+
+ubuntu@ubuntu-VirtualBox:~/proper$ ssh stud@45.12.5.87 'cd ~/volkov/b && tar -czf - bile*' | tar -xzf - -C ~/$name1/$name2
+stud@45.12.5.87's password: 
+ubuntu@ubuntu-VirtualBox:~/proper$ ls
+bile10.txt  bold  file10.txt  perenos.tar  perenos.tgz
+ubuntu@ubuntu-VirtualBox:~/proper$ cd $name2
+ubuntu@ubuntu-VirtualBox:~/proper/bold$ ls
+bile10.txt  bile4.txt  bile8.txt  file2.md  file6.md
+bile1.txt   bile5.txt  bile9.txt  file3.md  file7.md
+bile2.txt   bile6.txt  file10.md  file4.md  file8.md
+bile3.txt   bile7.txt  file1.md   file5.md  file9.md
+ubuntu@ubuntu-VirtualBox:~/proper/bold$ 

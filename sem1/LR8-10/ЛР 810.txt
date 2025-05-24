@@ -1,0 +1,780 @@
+########################## ЛР 8 ####################################
+lab8-10.c
+```
+File Edit Options Buffers Tools C Help                                          
+#include "func8-10.h"
+#include <stdio.h>
+
+int main() {
+  int x = 10, y = 10;
+
+  printf("Пример прямой рекурсии(сумма чисел от 0 до n):\n");
+  int answer = sum(x);
+  printf("Сумма чисел от 0 до %d равна %d\n", x, answer);
+
+  printf("Пример косвенной рекурсии:\n");
+  funcA(y);
+  asm("nop");
+
+  return 0;
+}
+```
+
+func8-10.c
+```                                                                        
+#include "func8-10.h"
+#include <stdio.h>
+
+//int sum(int x) {                                                                                                      
+//  if (x == 0) return 0;                                                                                               
+//  return x + sum(x - 1);                                                                                              
+//}                                                                                                                     
+
+void funcA(int x) {
+  if (x > 0) {
+    printf("A: %d\n", x);
+    funcB(x - 1);
+  }
+}
+
+void funcB(int x) {
+  if (x > 0) {
+    printf("B: %d\n", x);
+    funcA(x / 1);
+  }
+  asm("mov %eax, %ebx");
+}
+```
+func8-10.h
+```
+#ifndef FUNC8_10_H
+#define FUNC8_10_H
+
+int sum(int x);
+
+void funcA(int x);
+void funcB(int x);
+
+#endif
+```
+
+####################### ПРЕПРОЦЕССИНГ ################################
+1) Ошибка 1
+Изменим название зависимого файла в lab8-10.c
+Было:
+```#include "func8-10.h"```
+Стало:
+```#include "func810.h"```
+Ошибка:
+```			
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -E lab8-10.c -o lab8-10.i
+lab8-10.c:2:10: fatal error: func810.h: Нет такого файла или каталога
+    2 | #include "func810.h"
+      |          ^~~~~~~~~~~
+compilation terminated.
+```
+
+2) Ошибка 2
+Неправильное написание include
+```
+Ошибка:
+```
+ubuntu@ubuntu-VirtualBox:~/labsc$ emacs lab8-10.c
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -E lab8-10.c -o lab8-10.i
+lab8-10.c:1:2: error: invalid preprocessing directive #includ
+    1 | #includ "func8-10.h"
+      |  ^~~~~~
+```
+Исправление ошибок и препроцессинг:
+```
+ubuntu@ubuntu-VirtualBox:~/labsc$ emacs func8-10.h
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -E lab8-10.c -o lab8-10.i
+```
+
+Содержание файла lab8-10.i (#include <stdio.h> было удалено):
+```
+# 0 "lab8-10.c"
+# 0 "<built-in>"
+# 0 "<command-line>"
+# 1 "/usr/include/stdc-predef.h" 1 3 4
+# 0 "<command-line>" 2
+# 1 "lab8-10.c"
+# 1 "func8-10.h" 1
+
+
+
+int sum(int x);
+
+void funcA(int x);
+void funcB(int x);
+# 2 "lab8-10.c" 2
+
+int main() {
+  int x = 10, y = 10;
+
+  printf("Пример прямой рекурсии(сумма чисел от 0 до n):\n");
+  int answer = sum(x)
+  printf("Сумма чисел от 0 до %d равна %d\n", x, answer);
+
+  printf("Пример косвенной рекурсии:\n");
+  funcA(y);
+
+  return 0;
+}
+```
+
+
+################ КОМПИЛЯЦИЯ #################
+Изменения в файлах:
+1) Допустим синтаксическую ошибку, забыв инициализировать переменную
+2) Допустим синтаксическую ошибку, забыв дописать ";"
+
+Ошибки:
+```
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -E lab8-10.c -o lab8-10.i
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -S lab8-10.c -o lab8-10.s
+lab8-10.c: In function ‘main’:
+lab8-10.c:6:3: error: ‘y’ undeclared (first use in this function)
+    6 |   y = 10;
+      |   ^
+lab8-10.c:6:3: note: each undeclared identifier is reported only once for each function it appears in
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -E func8-10.c -o func8-10.i
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -S func8-10.c -o func8-10.s
+func8-10.c: In function ‘sum’:
+func8-10.c:6:24: error: expected ‘;’ before ‘}’ token
+    6 |   return x + sum(x - 1)
+      |                        ^
+      |                        ;
+    7 | }
+      | ~                       
+```
+
+Исправление ошибок и препроцессинг и компиляция:
+```
+ubuntu@ubuntu-VirtualBox:~/labsc$ emacs lab8-10.c
+ubuntu@ubuntu-VirtualBox:~/labsc$ emacs func8-10.c
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -E lab8-10.c -o lab8-10.i
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -E func8-10.c -o func8-10.i
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -S lab8-10.c -o lab8-10.s
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -S func8-10.c -o func8-10.s
+
+```
+
+Содержимое файлов:
+lab8-10.s
+```
+	.file	"lab8-10.c"
+	.text
+	.section	.rodata
+	.align 8
+.LC0:
+	.string	"\320\237\321\200\320\270\320\274\320\265\321\200 \320\277\321\200\321\217\320\274\320\276\320\271 \321\200\320\265\320\272\321\203\321\200\321\201\320\270\320\270(\321\201\321\203\320\274\320\274\320\260 \321\207\320\270\321\201\320\265\320\273 \320\276\321\202 0 \320\264\320\276 n):"
+	.align 8
+.LC1:
+	.string	"\320\241\321\203\320\274\320\274\320\260 \321\207\320\270\321\201\320\265\320\273 \320\276\321\202 0 \320\264\320\276 %d \321\200\320\260\320\262\320\275\320\260 %d\n"
+	.align 8
+.LC2:
+	.string	"\320\237\321\200\320\270\320\274\320\265\321\200 \320\272\320\276\321\201\320\262\320\265\320\275\320\275\320\276\320\271 \321\200\320\265\320\272\321\203\321\200\321\201\320\270\320\270:"
+	.text
+	.globl	main
+	.type	main, @function
+main:
+.LFB0:
+	.cfi_startproc
+	endbr64
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset 6, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register 6
+	subq	$16, %rsp
+	movl	$10, -12(%rbp)
+	movl	$10, -8(%rbp)
+	leaq	.LC0(%rip), %rax
+	movq	%rax, %rdi
+	call	puts@PLT
+	movl	-12(%rbp), %eax
+	movl	%eax, %edi
+	call	sum@PLT
+	movl	%eax, -4(%rbp)
+	movl	-4(%rbp), %edx
+	movl	-12(%rbp), %eax
+	movl	%eax, %esi
+	leaq	.LC1(%rip), %rax
+	movq	%rax, %rdi
+	movl	$0, %eax
+	call	printf@PLT
+	leaq	.LC2(%rip), %rax
+	movq	%rax, %rdi
+	call	puts@PLT
+	movl	-8(%rbp), %eax
+	movl	%eax, %edi
+	call	funcA@PLT
+#APP
+# 13 "lab8-10.c" 1
+	nop
+# 0 "" 2
+#NO_APP
+	movl	$0, %eax
+	leave
+	.cfi_def_cfa 7, 8
+	ret
+	.cfi_endproc
+.LFE0:
+	.size	main, .-main
+	.ident	"GCC: (Ubuntu 13.2.0-23ubuntu4) 13.2.0"
+	.section	.note.GNU-stack,"",@progbits
+	.section	.note.gnu.property,"a"
+	.align 8
+	.long	1f - 0f
+	.long	4f - 1f
+	.long	5
+0:
+	.string	"GNU"
+1:
+	.align 8
+	.long	0xc0000002
+	.long	3f - 2f
+2:
+	.long	0x3
+3:
+	.align 8
+4:
+```
+
+func8-10.s
+```
+	.file	"func8-10.c"
+	.text
+	.globl	sum
+	.type	sum, @function
+sum:
+.LFB0:
+	.cfi_startproc
+	endbr64
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset 6, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register 6
+	subq	$16, %rsp
+	movl	%edi, -4(%rbp)
+	cmpl	$0, -4(%rbp)
+	jne	.L2
+	movl	$0, %eax
+	jmp	.L3
+.L2:
+	movl	-4(%rbp), %eax
+	subl	$1, %eax
+	movl	%eax, %edi
+	call	sum
+	movl	-4(%rbp), %edx
+	addl	%edx, %eax
+.L3:
+	leave
+	.cfi_def_cfa 7, 8
+	ret
+	.cfi_endproc
+.LFE0:
+	.size	sum, .-sum
+	.section	.rodata
+.LC0:
+	.string	"A: %d\n"
+	.text
+	.globl	funcA
+	.type	funcA, @function
+funcA:
+.LFB1:
+	.cfi_startproc
+	endbr64
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset 6, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register 6
+	subq	$16, %rsp
+	movl	%edi, -4(%rbp)
+	cmpl	$0, -4(%rbp)
+	jle	.L6
+	movl	-4(%rbp), %eax
+	movl	%eax, %esi
+	leaq	.LC0(%rip), %rax
+	movq	%rax, %rdi
+	movl	$0, %eax
+	call	printf@PLT
+	movl	-4(%rbp), %eax
+	subl	$1, %eax
+	movl	%eax, %edi
+	call	funcB
+.L6:
+	nop
+	leave
+	.cfi_def_cfa 7, 8
+	ret
+	.cfi_endproc
+.LFE1:
+	.size	funcA, .-funcA
+	.section	.rodata
+.LC1:
+	.string	"B: %d\n"
+	.text
+	.globl	funcB
+	.type	funcB, @function
+funcB:
+.LFB2:
+	.cfi_startproc
+	endbr64
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset 6, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register 6
+	subq	$16, %rsp
+	movl	%edi, -4(%rbp)
+	cmpl	$0, -4(%rbp)
+	jle	.L8
+	movl	-4(%rbp), %eax
+	movl	%eax, %esi
+	leaq	.LC1(%rip), %rax
+	movq	%rax, %rdi
+	movl	$0, %eax
+	call	printf@PLT
+	movl	-4(%rbp), %eax
+	movl	%eax, %edi
+	call	funcA
+.L8:
+#APP
+# 21 "func8-10.c" 1
+	mov %eax, %ebx
+# 0 "" 2
+#NO_APP
+	nop
+	leave
+	.cfi_def_cfa 7, 8
+	ret
+	.cfi_endproc
+.LFE2:
+	.size	funcB, .-funcB
+	.ident	"GCC: (Ubuntu 13.2.0-23ubuntu4) 13.2.0"
+	.section	.note.GNU-stack,"",@progbits
+	.section	.note.gnu.property,"a"
+	.align 8
+	.long	1f - 0f
+	.long	4f - 1f
+	.long	5
+0:
+	.string	"GNU"
+1:
+	.align 8
+	.long	0xc0000002
+	.long	3f - 2f
+2:
+	.long	0x3
+3:
+	.align 8
+4:
+```
+
+
+################ АССЕМБЛИРОВАНИЕ ################
+Добавим команду asm, позволяющую добавить ассемблерный код в код С.
+1) В файле lab8-10.c допустим ошибку с несуществующей инструкцией:
+```asm("g2qpf");```
+2) В файле func8-10.c воспользуемся операндом mov, который обычно получает 2 значения, а мы запишем так:
+```asm("mov %eax");```
+
+Ошибки:
+```
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -E lab8-10.c -o lab8-10.i
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -E func8-10.c -o func8-10.i
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -S lab8-10.c -o lab8-10.s
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -S func8-10.c -o func8-10.s
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -c lab8-10.c -o lab8-10.o
+lab8-10.c: Сообщения ассемблера:
+lab8-10.c:13: Ошибка: такая инструкция не существует: «g2qpf»
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -c func8-10.c -o func8-10.o
+func8-10.c: Сообщения ассемблера:
+func8-10.c:21: Ошибка: несоответствие количества операндов для «mov»
+```
+
+Исправление ошибок, препроцессинг, компиляция, ассемблирование
+```
+ubuntu@ubuntu-VirtualBox:~/labsc$ emacs lab8-10.c
+ubuntu@ubuntu-VirtualBox:~/labsc$ emacs func8-10.c
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -E lab8-10.c -o lab8-10.i
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -E func8-10.c -o func8-10.i
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -S lab8-10.c -o lab8-10.s
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -S func8-10.c -o func8-10.s
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -c lab8-10.c -o lab8-10.o
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -c func8-10.c -o func8-10.o
+```
+
+Содержимое файла lab8-10.o
+```
+\0\0\0\0\0Пример косвенной рекурсии:\0\0GCC: (Ubuntu 13.2.0-23ubuntu4) 13.2.0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0GNU\0\0\0\C0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0zR\0x\90\0\0\0\0\0\0\0\0\0\0\0\0s\0\0\0\0E\86C
+j\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\F1\FF\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0s\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0 \0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0lab8-10.c\0main\0puts\0sum\0printf\0funcA\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\FC\FF\FF\FF\FF\FF\FF\FF%\0\0\0\0\0\0\0\0\0\0\0\0\0\FC\FF\FF\FF\FF\FF\FF\FF/\0\0\0\0\0\0\0\0\0\0\0\0\0\FC\FF\FF\FF\FF\FF\FF\FFA\0\0\0\0\0\0\0\0\0\0\0\0\0T\0\0\0\0\0\0\0N\0\0\0\0\0\0\0\0\0\0\0\0\0\FC\FF\FF\FF\FF\FF\FF\FFU\0\0\0\0\0\0\0\0\0\0\0\0\0\8C\0\0\0\0\0\0\0]\0\0\0\0\0\0\0\0\0\0\0\0\0\FC\FF\FF\FF\FF\FF\FF\FFg\0\0\0\0\0\0\0\0\0\0\0\0\0\FC\FF\FF\FF\FF\FF\FF\FF \0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0.symtab\0.strtab\0.shstrtab\0.rela.text\0.data\0.bss\0.rodata\0.comment\0.note.GNU-stack\0.note.gnu.property\0.rela.eh_frame\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0 \0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0@\0\0\0\0\0\0\0s\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0@\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\C0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0&\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\B3\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0,\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\B3\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\01\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\B8\0\0\0\0\0\0\0\C2\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\09\0\0\0\0\0\00\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0z\0\0\0\0\0\0'\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0B\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\A1\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0R\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\A8\0\0\0\0\0\0 \0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0j\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\C8\0\0\0\0\0\08\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0e\0\0\0\0\0\0@\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\C0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0	\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\D8\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0	\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\D8\0\0\0\0\0\0&\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\D8\0\0\0\0\0\0t\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0
+```
+
+Содержимое файла func8-10.o
+```
+\0\0GCC: (Ubuntu 13.2.0-23ubuntu4) 13.2.0\0\0\0\0\0\0\0\0\0\0GNU\0\0\0\C0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0zR\0x\90\0\0\0\0\0\0\0\0\0\0\0\00\0\0\0\0E\86C
+g\0\0\0\0\0\0<\0\0\0\0\0\0\0>\0\0\0\0E\86C
+u\0\0\0\0\0\0\\0\0\0\0\0\0\0=\0\0\0\0E\86C
+t\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\F1\FF\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\00\0\0\0\0\0\0\0\0\0\0\0\00\0\0\0\0\0\0\0>\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0n\0\0\0\0\0\0\0=\0\0\0\0\0\0\0\0func8-10.c\0sum\0funcA\0printf\0funcB\0\0\0\0\0\0%\0\0\0\0\0\0\0\0\0\0\0\0\0\FC\FF\FF\FF\FF\FF\FF\FFM\0\0\0\0\0\0\0\0\0\0\0\0\0\FC\FF\FF\FF\FF\FF\FF\FFZ\0\0\0\0\0\0\0\0\0\0\0\0\0\FC\FF\FF\FF\FF\FF\FF\FFg\0\0\0\0\0\0\0\0\0\0\0\0\0\FC\FF\FF\FF\FF\FF\FF\FF\8B\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\98\0\0\0\0\0\0\0\0\0\0\0\0\0\FC\FF\FF\FF\FF\FF\FF\FF\A2\0\0\0\0\0\0\0\0\0\0\0\0\0\FC\FF\FF\FF\FF\FF\FF\FF \0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0@\0\0\0\0\0\0\0\0\0\0\0\0\00\0\0\0\0\0\0\0`\0\0\0\0\0\0\0\0\0\0\0\0\0n\0\0\0\0\0\0\0\0.symtab\0.strtab\0.shstrtab\0.rela.text\0.data\0.bss\0.rodata\0.comment\0.note.GNU-stack\0.note.gnu.property\0.rela.eh_frame\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0 \0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0@\0\0\0\0\0\0\0\AB\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0@\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\A0\0\0\0\0\0\0\A8\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0&\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\EB\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0,\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\EB\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\01\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\EB\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\09\0\0\0\0\0\00\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\F9\0\0\0\0\0\0\0'\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0B\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0 \0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0R\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0 \0\0\0\0\0\0 \0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0j\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0@\0\0\0\0\0\0x\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0e\0\0\0\0\0\0@\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0H\0\0\0\0\0\0H\0\0\0\0\0\0\0\0\0\0	\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\B8\0\0\0\0\0\0\C0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0	\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0x\0\0\0\0\0\0#\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\90\0\0\0\0\0\0t\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0
+```
+
+
+###################### ЛИНКОВКА ###########################
+Ошибка 1:
+```
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -E lab8-10.c -o lab8-10.i
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -E func8-10.c -o func8-10.i
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -S lab8-10.c -o lab8-10.s
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -S func8-10.c -o func8-10.s
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -c lab8-10.c -o lab8-10.o
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -c func8-10.c -o func8-10.o
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc lab8-10.c -o lab8-10
+/usr/bin/ld: /tmp/cc6TBWjK.o: в функции «main»:
+lab8-10.c:(.text+0x2f): undefined reference to `sum'
+/usr/bin/ld: lab8-10.c:(.text+0x67): undefined reference to `funcA'
+collect2: error: ld returned 1 exit status
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -E lab8-10.c -o lab8-10.i
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -E func8-10.c -o func8-10.i
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -S lab8-10.c -o lab8-10.s
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -S func8-10.c -o func8-10.s
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -c lab8-10.c -o lab8-10.o
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -c func8-10.c -o func8-10.o
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc lab8-10.c func8-10.c -o lab8-10
+```
+
+Ошибка 2 - добавим ещё одну функция funcA() в файл lab8-10.c:
+```
+ubuntu@ubuntu-VirtualBox:~/labsc$ emacs func8-10.c
+ubuntu@ubuntu-VirtualBox:~/labsc$ emacs lab8-10.c
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -E lab8-10.c -o lab8-10.i
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -E func8-10.c -o func8-10.i
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -S lab8-10.c -o lab8-10.s
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -S func8-10.c -o func8-10.s
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -c lab8-10.c -o lab8-10.o
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc -c func8-10.c -o func8-10.o
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc lab8-10.c func8-10.c -o lab8-10
+/usr/bin/ld: /tmp/cciGRlYX.o: в функции «funcA»:
+func8-10.c:(.text+0x30): повторное определение «funcA»; /tmp/ccRP0l5i.o:lab8-10.c:(.text+0x0): здесь первое определение
+collect2: error: ld returned 1 exit status
+ubuntu@ubuntu-VirtualBox:~/labsc$ emacs lab8-10.c
+ubuntu@ubuntu-VirtualBox:~/labsc$ gcc lab8-10.c func8-10.c -o lab8-10
+```
+
+
+########################## ЛР 10 ####################################
+'''
+gcc -g lab8-10.c func8-10.c -o lab8-10
+ubuntu@ubuntu-VirtualBox:~/labsc$ gdb ./lab8-10
+GNU gdb (Ubuntu 15.0.50.20240403-0ubuntu1) 15.0.50.20240403-git
+Copyright (C) 2024 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<https://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from ./lab8-10...
+(gdb) help
+List of classes of commands:
+
+aliases -- User-defined aliases of other commands.
+breakpoints -- Making program stop at certain points.
+data -- Examining data.
+files -- Specifying and examining files.
+internals -- Maintenance commands.
+obscure -- Obscure features.
+running -- Running the program.
+stack -- Examining the stack.
+status -- Status inquiries.
+support -- Support facilities.
+text-user-interface -- TUI is the GDB text based interface.
+tracepoints -- Tracing of program execution without stopping the program.
+user-defined -- User-defined commands.
+
+Type "help" followed by a class name for a list of commands in that class.
+Type "help all" for the list of all commands.
+Type "help" followed by command name for full documentation.
+Type "apropos word" to search for commands related to "word".
+Type "apropos -v word" for full documentation of commands related to "word".
+Command name abbreviations are allowed if unambiguous.
+(gdb) list 8
+3	
+4	int main() {
+5	  int x = 10, y = 10;
+6	
+7	  printf("Пример прямой рекурсии(сумма чисел от 0 до n):\n");
+8	  int answer = sum(x);
+9	  printf("Сумма чисел от 0 до %d равна %d\n", x, answer);
+10	
+11	  printf("Пример косвенной рекурсии:\n");
+12	  funcA(y);
+(gdb) break 4
+Breakpoint 1 at 0x1175: file lab8-10.c, line 5.
+(gdb) break 7
+Breakpoint 2 at 0x1183: file lab8-10.c, line 7.
+(gdb) break 11
+Breakpoint 3 at 0x11bb: file lab8-10.c, line 11.
+(gdb) run
+Starting program: /home/ubuntu/labsc/lab8-10 
+
+This GDB supports auto-downloading debuginfo from the following URLs:
+  <https://debuginfod.ubuntu.com>
+Enable debuginfod for this session? (y or [n]) y
+Debuginfod has been enabled.
+To make this setting permanent, add 'set debuginfod enabled on' to .gdbinit.
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+
+Breakpoint 1, main () at lab8-10.c:5
+5	  int x = 10, y = 10;
+(gdb) print x
+$1 = 32767
+(gdb) next
+
+Breakpoint 2, main () at lab8-10.c:7
+7	  printf("Пример прямой рекурсии(сумма чисел от 0 до n):\n");
+(gdb) print x
+$2 = 10
+(gdb) ptype funcA()
+type = void
+(gdb) set var y = 4
+(gdb) print y
+$3 = 4
+(gdb) print sum(y)
+$4 = 10
+(gdb) next
+Пример прямой рекурсии(сумма чисел от 0 до n):
+8	  int answer = sum(x);
+(gdb) step
+sum (x=10) at func8-10.c:5
+5	  if (x == 0) return 0;
+(gdb) step
+6	  return x + sum(x - 1);
+(gdb) step
+sum (x=9) at func8-10.c:5
+5	  if (x == 0) return 0;
+(gdb) 
+6	  return x + sum(x - 1);
+(gdb) 
+sum (x=8) at func8-10.c:5
+5	  if (x == 0) return 0;
+(gdb) 
+6	  return x + sum(x - 1);
+(gdb) bt
+#0  sum (x=8) at func8-10.c:6
+#1  0x0000555555555205 in sum (x=9) at func8-10.c:6
+#2  0x0000555555555205 in sum (x=10) at func8-10.c:6
+#3  0x000055555555519c in main () at lab8-10.c:8
+(gdb) step
+sum (x=7) at func8-10.c:5
+5	  if (x == 0) return 0;
+(gdb) 
+6	  return x + sum(x - 1);
+(gdb) 
+sum (x=6) at func8-10.c:5
+5	  if (x == 0) return 0;
+(gdb) 
+6	  return x + sum(x - 1);
+(gdb) continue
+Continuing.
+Сумма чисел от 0 до 10 равна 55
+
+Breakpoint 3, main () at lab8-10.c:11
+11	  printf("Пример косвенной рекурсии:\n");
+(gdb) bt
+#0  main () at lab8-10.c:11
+(gdb) next
+Пример косвенной рекурсии:
+12	  funcA(y);
+(gdb) next 10
+A: 4
+B: 3
+A: 3
+B: 2
+A: 2
+B: 1
+A: 1
+[Inferior 1 (process 17172) exited normally]
+(gdb) quit
+ubuntu@ubuntu-VirtualBox:~/labsc$ 
+```
+
+
+next на прямой рекурсии:
+```
+Breakpoint 1, main () at lab8-10.c:5
+5	  int x = 10, y = 10;
+(gdb) next
+
+Breakpoint 2, main () at lab8-10.c:7
+7	  printf("Пример прямой рекурсии(сумма чисел от 0 до n):\n");
+(gdb) next
+Пример прямой рекурсии(сумма чисел от 0 до n):
+8	  int answer = sum(x);
+(gdb) next
+9	  printf("Сумма чисел от 0 до %d равна %d\n", x, answer);
+(gdb) next
+Сумма чисел от 0 до 10 равна 55
+```
+
+step на прямой рекурсии:
+```
+(gdb) next
+Пример прямой рекурсии(сумма чисел от 0 до n):
+8	  int answer = sum(x);
+(gdb) step
+sum (x=10) at func8-10.c:5
+5	  if (x == 0) return 0;
+(gdb) step
+6	  return x + sum(x - 1);
+(gdb) step
+sum (x=9) at func8-10.c:5
+5	  if (x == 0) return 0;
+(gdb) step
+6	  return x + sum(x - 1);
+(gdb) step
+sum (x=8) at func8-10.c:5
+5	  if (x == 0) return 0;
+(gdb) step
+6	  return x + sum(x - 1);
+(gdb) 
+sum (x=7) at func8-10.c:5
+5	  if (x == 0) return 0;
+(gdb) 
+6	  return x + sum(x - 1);
+(gdb) 
+sum (x=6) at func8-10.c:5
+5	  if (x == 0) return 0;
+(gdb) 
+6	  return x + sum(x - 1);
+(gdb) 
+sum (x=5) at func8-10.c:5
+5	  if (x == 0) return 0;
+(gdb) 
+6	  return x + sum(x - 1);
+(gdb) 
+sum (x=4) at func8-10.c:5
+5	  if (x == 0) return 0;
+(gdb) 
+6	  return x + sum(x - 1);
+(gdb) 
+sum (x=3) at func8-10.c:5
+5	  if (x == 0) return 0;
+(gdb) 
+6	  return x + sum(x - 1);
+(gdb) 
+sum (x=2) at func8-10.c:5
+5	  if (x == 0) return 0;
+(gdb) 
+6	  return x + sum(x - 1);
+(gdb) 
+sum (x=1) at func8-10.c:5
+5	  if (x == 0) return 0;
+(gdb) 
+6	  return x + sum(x - 1);
+(gdb) 
+sum (x=0) at func8-10.c:5
+5	  if (x == 0) return 0;
+(gdb) 
+7	}
+(gdb) cont
+Continuing.
+Сумма чисел от 0 до 10 равна 55
+```
+
+bt на прямой рекурсии:
+```
+(gdb) step
+sum (x=10) at func8-10.c:5
+5	  if (x == 0) return 0;
+(gdb) 
+6	  return x + sum(x - 1);
+(gdb) 
+sum (x=9) at func8-10.c:5
+5	  if (x == 0) return 0;
+(gdb) 
+6	  return x + sum(x - 1);
+(gdb) 
+sum (x=8) at func8-10.c:5
+5	  if (x == 0) return 0;
+(gdb) 
+6	  return x + sum(x - 1);
+(gdb) 
+sum (x=7) at func8-10.c:5
+5	  if (x == 0) return 0;
+(gdb) 
+6	  return x + sum(x - 1);
+(gdb) 
+sum (x=6) at func8-10.c:5
+5	  if (x == 0) return 0;
+(gdb) bt
+#0  sum (x=6) at func8-10.c:5
+#1  0x0000555555555205 in sum (x=7) at func8-10.c:6
+#2  0x0000555555555205 in sum (x=8) at func8-10.c:6
+#3  0x0000555555555205 in sum (x=9) at func8-10.c:6
+#4  0x0000555555555205 in sum (x=10) at func8-10.c:6
+#5  0x000055555555519c in main () at lab8-10.c:8
+```
+
+bt на косвенной рекурсии
+```
+(gdb) step
+funcA (x=10) at func8-10.c:10
+10	  if (x > 0) {
+(gdb) next
+11	    printf("A: %d\n", x);
+(gdb) 
+A: 10
+12	    funcB(x - 1);
+(gdb) step
+funcB (x=9) at func8-10.c:17
+17	  if (x > 0) {
+(gdb) 
+18	    printf("B: %d\n", x);
+(gdb) next
+B: 9
+19	    funcA(x / 1);
+(gdb) step
+funcA (x=9) at func8-10.c:10
+10	  if (x > 0) {
+(gdb) 
+11	    printf("A: %d\n", x);
+(gdb) next
+A: 9
+12	    funcB(x - 1);
+(gdb) step
+funcB (x=8) at func8-10.c:17
+17	  if (x > 0) {
+(gdb) 
+18	    printf("B: %d\n", x);
+(gdb) next
+B: 8
+19	    funcA(x / 1);
+(gdb) step
+funcA (x=8) at func8-10.c:10
+10	  if (x > 0) {
+(gdb) 
+11	    printf("A: %d\n", x);
+(gdb) next
+A: 8
+12	    funcB(x - 1);
+(gdb) bt
+#0  funcA (x=8) at func8-10.c:12
+#1  0x0000555555555282 in funcB (x=8) at func8-10.c:19
+#2  0x0000555555555247 in funcA (x=9) at func8-10.c:12
+#3  0x0000555555555282 in funcB (x=9) at func8-10.c:19
+#4  0x0000555555555247 in funcA (x=10) at func8-10.c:12
+#5  0x00005555555551d4 in main () at lab8-10.c:12
+```
